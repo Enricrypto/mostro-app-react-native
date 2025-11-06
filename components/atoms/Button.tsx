@@ -44,7 +44,6 @@ interface ButtonProps {
   icon?: React.ReactNode
   badge?: string
   disabled?: boolean
-  style?: ViewStyle
 }
 
 const baseButton: ViewStyle = {
@@ -213,85 +212,63 @@ const variantStyles: Record<
   "play-btn": {
     style: {
       ...baseButton,
-      width: 48,
-      height: 48,
-      borderRadius: 24,
-      backgroundColor: "#6C5CE7",
-      paddingHorizontal: 0,
-      paddingVertical: 0
+      minWidth: 40,
+      height: 40,
+      borderRadius: 20,
+      backgroundColor: "#71D6FB"
     },
-    textStyle: { ...baseText, color: "#FFFFFF" }
+    textStyle: { ...baseText, color: "#000000" }
   },
   "skip-btn": {
     style: {
       ...baseButton,
-      width: 32,
+      minWidth: 40,
       height: 32,
-      backgroundColor: "transparent",
-      paddingHorizontal: 0,
-      paddingVertical: 0
+      borderRadius: 16,
+      backgroundColor: "#121B2B"
     },
-    textStyle: { ...baseText, color: "#000000" }
+    textStyle: { ...baseText, color: "#FFFFFF" }
   },
   "back-btn": {
     style: {
       ...baseButton,
-      width: 32,
-      height: 32,
-      backgroundColor: "transparent",
-      paddingHorizontal: 0,
-      paddingVertical: 0
+      minWidth: 56,
+      borderWidth: 1,
+      borderColor: "#71D6FB",
+      backgroundColor: "transparent"
     },
-    textStyle: { ...baseText, color: "#000000" }
+    textStyle: { ...baseText, color: "#FFFFFF" }
   },
   "status-badge": {
     style: {
       ...baseButton,
       minWidth: 80,
-      height: 32,
-      borderRadius: 16,
-      backgroundColor: "#B3B3B3",
-      paddingHorizontal: 12,
-      paddingVertical: 6
+      height: 28,
+      borderRadius: 14,
+      backgroundColor: "#6654D3",
+      paddingHorizontal: 12
     },
-    textStyle: { ...baseText, color: "#000000" }
+    textStyle: { ...baseText, color: "#FFFFFF", fontSize: 12 }
   },
   "play-circle": {
     style: {
-      width: 48,
+      ...baseButton,
+      minWidth: 48,
       height: 48,
       borderRadius: 24,
-      borderWidth: 1,
-      borderColor: "#71D6FB",
-      backgroundColor: "transparent",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingHorizontal: 0,
-      paddingVertical: 0
-    },
-    textStyle: { ...baseText, color: "#FFFFFF" }
-  },
-  "play-featured": {
-    style: {
-      ...baseButton,
       backgroundColor: "#71D6FB",
-      borderRadius: 10,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      minWidth: 100,
+      paddingHorizontal: 0
     },
     textStyle: { ...baseText, color: "#000000" }
   },
-  "continue": {
-    style: {
-      ...baseButton,
-      minWidth: 288,
-      borderWidth: 1,
-      borderColor: "#DCFD63B2",
-      backgroundColor: "#DCFD63B2"
-    },
-    textStyle: { ...baseText, color: "#000000ff" }
+  "play-featured": {
+    style: { ...baseButton, minWidth: 200, backgroundColor: "#71D6FB" },
+    textStyle: { ...baseText, color: "#000000" }
   },
+  continue: {
+    style: { ...baseButton, minWidth: 330, backgroundColor: "#71D6FB" },
+    textStyle: { ...baseText, color: "#000000" }
+  }
 }
 
 export const Button = ({
@@ -301,8 +278,7 @@ export const Button = ({
   onPress,
   icon,
   badge,
-  disabled,
-  style
+  disabled
 }: ButtonProps) => {
   const { style: variantStyle, textStyle } = variantStyles[variant]
 
@@ -323,7 +299,7 @@ export const Button = ({
       activeOpacity={0.7}
       accessibilityRole='button'
       accessibilityLabel={title}
-      style={[finalStyle, disabled && { opacity: 0.5 }, style]}
+      style={[finalStyle, disabled && { opacity: 0.5 }]}
     >
       {/* ICON */}
       {icon && <View style={{ marginRight: title ? 8 : 0 }}>{icon}</View>}

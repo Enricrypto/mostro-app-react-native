@@ -1,18 +1,22 @@
-import { ArtistCard } from "@/components/Molecules/ArtistCard";
-import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner";
-import { ArtistStats } from "@/components/Molecules/ArtistStats";
-import { OnBoardingScreen } from "@/components/Molecules/OnBoardingScreen";
-import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard";
+import { ArtistCard } from "@/components/molecules/ArtistCard"
+import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
+import { ArtistStats } from "@/components/molecules/ArtistStats"
+import { OnBoardingScreen } from "@/components/molecules/OnBoardingScreen"
+import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
+import { VotingHistoryCardProps } from "@/components/molecules/VotingHistoryCard"
+import { Navbar } from "@/components/navigation/Navbar"
+import { GenreSearchBar } from "@/components/organisms/GenreSearchBar"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { ArrowUpRightIcon } from "phosphor-react-native"
+import React, { useEffect, useState } from "react"
 import {
-  VotingHistoryCardProps
-} from "@/components/Molecules/VotingHistoryCard";
-import { Navbar } from "@/components/navigation/Navbar";
-import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ArrowUpRightIcon } from "phosphor-react-native";
-import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native"
 
 const track = {
   title: "Burning Up",
@@ -185,101 +189,123 @@ export default function Index() {
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
-      <View >
+      <View>
         <Navbar />
       </View>
 
       <View style={styles.containerGenre}>
-        <GenreSearchBar onSelectGenre={(genre: any) => console.log("Selected genre:", genre)} />
+        <GenreSearchBar
+          onSelectGenre={(genre: any) => console.log("Selected genre:", genre)}
+        />
       </View>
 
-      <View style={styles.ProfileCard} >
+      <View style={styles.ProfileCard}>
         <ArtistProfileBanner artist={artistProfile} />
       </View>
-
-
 
       <View style={{ marginTop: 30 }}>
         <ArtistStats />
       </View>
 
-    <View>
-      <View  style={{marginTop: 30, marginBottom: 20}}>
-       <Text style={styles.TockenSectionTitle}>Top Artist</Text>
+      <View>
+        <View style={{ marginTop: 30, marginBottom: 20 }}>
+          <Text style={styles.TockenSectionTitle}>Top Artist</Text>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "column",
+            rowGap: 20
+          }}
+        >
+          <ArtistCard artist={artist} />
+          <ArtistCard artist={artist} />
+          <ArtistCard artist={artist} />
+        </View>
       </View>
-     
-      <View style={{
-        flexDirection: "column",
-        rowGap: 20
-      }}>
-        <ArtistCard artist={artist} />
-        <ArtistCard artist={artist} />
-        <ArtistCard artist={artist} />
+
+      <View style={{ marginTop: 30, marginBottom: 20 }}>
+        <Text
+          style={{
+            color: "#ffffff",
+            textAlign: "left",
+            alignSelf: "flex-start",
+            fontWeight: "600",
+            fontSize: 20
+          }}
+        >
+          Top Holders
+        </Text>
       </View>
-    </View>
-    
-     <View style={{marginTop: 30, marginBottom: 20}}>
-  <Text style={{
-    color:"#ffffff",
-    textAlign: "left",
-    alignSelf: "flex-start",
-    fontWeight: "600",
-    fontSize: 20
-  }}>
-    Top Holders
-  </Text>
-</View>
 
       <View style={styles.ContainerTopholder}>
         <Text style={styles.rank}>#1</Text>
         <Image
-          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s"
+          }}
           style={styles.avatar}
         />
-        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}>
+          {" "}
+          Mostrofan.th
+        </Text>
       </View>
 
-        <View style={styles.ContainerTopholder}>
+      <View style={styles.ContainerTopholder}>
         <Text style={styles.rank}>#1</Text>
         <Image
-          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s"
+          }}
           style={styles.avatar}
         />
-        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}>
+          {" "}
+          Mostrofan.th
+        </Text>
       </View>
-        <View style={styles.ContainerTopholder}>
+      <View style={styles.ContainerTopholder}>
         <Text style={styles.rank}>#1</Text>
         <Image
-          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s"
+          }}
           style={styles.avatar}
         />
-        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}>
+          {" "}
+          Mostrofan.th
+        </Text>
       </View>
-        <View style={styles.ContainerTopholder}>
+      <View style={styles.ContainerTopholder}>
         <Text style={styles.rank}>#1</Text>
         <Image
-          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          source={{
+            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s"
+          }}
           style={styles.avatar}
         />
-        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}>
+          {" "}
+          Mostrofan.th
+        </Text>
       </View>
 
-      <View >
-      <View style={{marginTop: 30, marginBottom: 20}}>
-           <Text style={styles.TockenSectionTitle}> Trending Tokens</Text>
-      </View>
+      <View>
+        <View style={{ marginTop: 30, marginBottom: 20 }}>
+          <Text style={styles.TockenSectionTitle}> Trending Tokens</Text>
+        </View>
         <View style={styles.row}>
           <TrendingTokenCard token={trendingToken} />
           <TrendingTokenCard token={trendingToken} />
           <TrendingTokenCard token={trendingToken} />
         </View>
-          <TouchableOpacity style={styles.button}>
-                            <Text style={{color: "#ffffff"}}>View All</Text>
-                             <ArrowUpRightIcon size={24} color='#ffffff' />
+        <TouchableOpacity style={styles.button}>
+          <Text style={{ color: "#ffffff" }}>View All</Text>
+          <ArrowUpRightIcon size={24} color='#ffffff' />
         </TouchableOpacity>
       </View>
-
     </ScrollView>
   )
 }
@@ -301,25 +327,24 @@ const styles = StyleSheet.create({
   containerGenre: {
     width: 393,
     height: 72,
-    position: 'absolute',
+    position: "absolute",
     top: 130,
     left: 1,
     opacity: 1,
     borderTopWidth: 2,
     borderBottomWidth: 2,
-    borderColor: '#121B2B',
+    borderColor: "#121B2B",
     borderRadius: 6,
     paddingLeft: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-
+    flexDirection: "row",
+    alignItems: "center"
   },
   ProfileCard: {
-    marginTop: 130,
+    marginTop: 130
   },
   TrackSectionContainer: {
     paddingTop: 16,
-    paddingBottom: 16,
+    paddingBottom: 16
   },
   TopHoldersSectionTitle: {
     fontSize: 20,
@@ -348,11 +373,11 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingBottom: 12,
     paddingLeft: 16,
-    flexDirection: "row",     // ✅ children in a row
-    alignItems: "center",     // ✅ vertical centering
+    flexDirection: "row", // ✅ children in a row
+    alignItems: "center", // ✅ vertical centering
     justifyContent: "flex-start",
     opacity: 1,
-    gap: 8,                   // ✅ RN 0.71+ supports gap
+    gap: 8 // ✅ RN 0.71+ supports gap
   },
   rank: {
     fontFamily: "Inter",
@@ -365,7 +390,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20,         // ✅ half of width/height → perfect circle
+    borderRadius: 20 // ✅ half of width/height → perfect circle
   },
   VotingSectionTitle: {
     fontSize: 20,
@@ -389,6 +414,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     gap: 8
-
   }
 })

@@ -115,7 +115,7 @@ export function Badge({
   )
 
   // Profile label uses gradient
-  if (variant === "profile-label" || variant === "featured-artist") {
+  if (variant === "profile-label") {
     return (
       <LinearGradient
         colors={["#71D6FB", "#DCFD63"]}
@@ -139,7 +139,7 @@ function createBadgeStyle(
   backgroundColor: string
 ): ViewStyle {
   return {
-    minHeight: 22,
+    height: 22,
     borderRadius: 10,
     borderWidth: 1,
     borderColor,
