@@ -1,18 +1,14 @@
-import { useEffect, useRef } from "react"
-import { Animated, Easing, StyleSheet, View } from "react-native"
+import React, { useEffect, useRef } from 'react';
+import { Animated, Easing, StyleSheet, View } from 'react-native';
 
 interface LoadingSpinnerProps {
-  size?: "small" | "large"
-  color?: string
-  speed?: number
+  size?: 'small' | 'large';
+  color?: string;
+  speed?: number;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
-  size = "large",
-  color = "#000",
-  speed = 1
-}) => {
-  const rotation = useRef(new Animated.Value(0)).current
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'large', color = '#000', speed = 1 }) => {
+  const rotation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     const animation = Animated.loop(
@@ -20,19 +16,19 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         toValue: 1,
         duration: 1000 / speed,
         easing: Easing.linear,
-        useNativeDriver: true
+        useNativeDriver: true,
       })
-    )
-    animation.start()
-    return () => animation.stop()
-  }, [rotation, speed])
+    );
+    animation.start();
+    return () => animation.stop();
+  }, [rotation, speed]);
 
   const rotate = rotation.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"]
-  })
+    outputRange: ['0deg', '360deg'],
+  });
 
-  const spinnerSize = size === "large" ? 48 : 24
+  const spinnerSize = size === 'large' ? 48 : 24;
 
   return (
     <View style={styles.container}>
@@ -43,22 +39,22 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
             width: spinnerSize,
             height: spinnerSize,
             borderColor: color,
-            borderTopColor: "transparent",
-            transform: [{ rotate }]
-          }
+            borderTopColor: 'transparent',
+            transform: [{ rotate }],
+          },
         ]}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   spinner: {
     borderRadius: 24,
-    borderWidth: 4
-  }
-})
+    borderWidth: 4,
+  },
+});
