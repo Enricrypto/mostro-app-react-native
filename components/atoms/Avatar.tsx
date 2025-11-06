@@ -1,5 +1,7 @@
+import React, { useMemo } from "react"
 import {
   Image,
+  ImageStyle,
   StyleProp,
   StyleSheet,
   Text,
@@ -20,6 +22,15 @@ interface AvatarProps {
   fallback?: string
   variant?: AvatarVariant
   style?: StyleProp<ViewStyle>
+  border?: boolean
+  shadow?: boolean
+  accessibilityLabel?: string
+}
+
+const baseAvatar: ViewStyle = {
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden"
 }
 
 const VARIANT_STYLES: Record<AvatarVariant, ViewStyle> = {
@@ -65,43 +76,78 @@ export const Avatar: React.FC<AvatarProps> = ({
   src,
   fallback,
   variant = "medium-square",
-  style
+  style,
+  border,
+  shadow,
+  accessibilityLabel
 }) => {
   const variantStyle = VARIANT_STYLES[variant]
 
+  // Generate initials if fallback not provided
+  const fallbackText = useMemo(() => {
+    if (fallback) return fallback
+    if (accessibilityLabel) {
+      const words = accessibilityLabel.trim().split(" ")
+      const initials = words
+        .slice(0, 2)
+        .map((w) => w[0]?.toUpperCase())
+        .join("")
+      return initials || "?"
+    }
+    return "?"
+  }, [fallback, accessibilityLabel])
+
   return (
-    <View style={[styles.container, variantStyle, style]}>
+    <View
+      style={[
+        baseAvatar,
+        variantStyle,
+        border && styles.border,
+        shadow && styles.shadow,
+        style
+      ]}
+      accessibilityRole='image'
+      accessibilityLabel={accessibilityLabel || fallbackText}
+    >
       {src ? (
         <Image
           source={{ uri: src }}
-          style={[styles.image, { borderRadius: variantStyle.borderRadius }]}
+          style={[
+            StyleSheet.absoluteFillObject as ImageStyle,
+            { borderRadius: variantStyle.borderRadius }
+          ]}
           resizeMode='cover'
         />
-      ) : fallback ? (
+      ) : (
         <View style={styles.fallbackContainer}>
-          <Text style={styles.fallbackText}>{fallback}</Text>
+          <Text style={styles.fallbackText}>{fallbackText}</Text>
         </View>
-      ) : null}
+      )}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    overflow: "hidden",
-    justifyContent: "center",
-    alignItems: "center"
+  border: {
+    borderWidth: 1,
+    borderColor: "#71D6FB"
   },
-  image: {
-    width: "100%",
-    height: "100%"
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4
   },
   fallbackContainer: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%",
+    height: "100%"
   },
   fallbackText: {
     color: "#000",
-    fontWeight: "bold"
+    fontWeight: "700",
+    fontSize: 18
   }
 })
