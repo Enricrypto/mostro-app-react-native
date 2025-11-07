@@ -120,7 +120,7 @@ function createBadgeStyle(
   backgroundColor: string
 ): ViewStyle {
   return {
-    height: 22,
+    minHeight: 22,
     borderRadius: 10,
     borderWidth: 1,
     borderColor,
