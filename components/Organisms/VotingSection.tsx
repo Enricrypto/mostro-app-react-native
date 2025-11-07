@@ -1,8 +1,8 @@
-import { Button } from "@/components/atoms/Button"
-import { VotingProgress } from "@/components/Molecules/VotingProgress"
 import { ThumbsDownIcon, ThumbsUpIcon } from "phosphor-react-native"
-import { useState } from "react"
+import React, { useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { Button } from "../atoms/Button"
+import { VotingProgress } from "../molecules/VotingProgress"
 
 export const VotingSection: React.FC = () => {
   const [yesVotes, setYesVotes] = useState(125)

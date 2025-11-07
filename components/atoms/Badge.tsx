@@ -11,8 +11,6 @@ type BadgeVariant =
   | "red"
   | "tokens-info"
   | "featured-artist"
-  | "song-token-info"
-  | "section-menu-item"
 
 interface BadgeProps {
   variant?: BadgeVariant
@@ -72,14 +70,6 @@ export function Badge({
       borderRadius: 28,
       paddingVertical: 4,
       paddingHorizontal: 12
-    },
-    "song-token-info": createBadgeStyle("#B3B3B3", "rgba(179, 179, 179, 0.3)"),
-    "section-menu-item": {
-      height: 32,
-      borderRadius: 8,
-      paddingVertical: 6,
-      paddingHorizontal: 16,
-      backgroundColor: selected ? "#6654D3" : "transparent"
     }
   }
 
@@ -92,9 +82,7 @@ export function Badge({
     green: "#DCFD63",
     red: "#FD6363",
     "tokens-info": "#42EE5C",
-    "featured-artist": "#000000",
-    "song-token-info": "#FFFFFF",
-    "section-menu-item": selected ? "#FFFFFF" : "#B3B3B3"
+    "featured-artist": "#000000"
   }
 
   const textBase: TextStyle = {
@@ -115,7 +103,7 @@ export function Badge({
   )
 
   // Profile label uses gradient
-  if (variant === "profile-label") {
+  if (variant === "profile-label" || variant === "featured-artist") {
     return (
       <LinearGradient
         colors={["#71D6FB", "#DCFD63"]}

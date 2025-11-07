@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, findNodeHandle } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, findNodeHandle, LayoutChangeEvent } from 'react-native';
 
 interface TooltipProps {
   content: string;
@@ -13,16 +13,17 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, position = 'top', del
   const [tooltipLayout, setTooltipLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
   const childRef = useRef<View>(null);
 
-  const handlePress = () => {
-    if (childRef.current) {
-      const nodeHandle = findNodeHandle(childRef.current);
-      if (nodeHandle) {
-        childRef.current.measure((fx, fy, width, height, px, py) => {
-          setTooltipLayout({ x: px, y: py, width, height });
-          setTimeout(() => setVisible(true), delay);
-        });
-      }
-    }
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { x, y, width, height } = event.nativeEvent.layout;
+    setTooltipLayout({ x, y, width, height });
+  };
+
+  const handleLongPressIn = () => {
+    setTimeout(() => setVisible(true), delay);
+  };
+
+  const handleLongPressOut = () => {
+    setVisible(false);
   };
 
   const getTooltipPosition = () => {
@@ -50,7 +51,15 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, position = 'top', del
 
   return (
     <View>
-      {React.cloneElement(children, { onPress: handlePress, ref: childRef })}
+      <TouchableOpacity
+        onLongPress={handleLongPressIn}
+        onPressOut={handleLongPressOut}
+        ref={childRef}
+        onLayout={onLayout}
+        activeOpacity={1} // To prevent the wrapper from dimming on press
+      >
+        {children}
+      </TouchableOpacity>
       <Modal visible={visible} transparent animationType="fade">
         <TouchableOpacity style={styles.modalContainer} onPress={() => setVisible(false)}>
           <View style={[styles.tooltip, getTooltipPosition()]}>

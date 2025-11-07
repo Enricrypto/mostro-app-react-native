@@ -1,6 +1,7 @@
-import { ProgressBar } from "@/components/atoms/ProgressBar"
 import { ThumbsDownIcon, ThumbsUpIcon } from "phosphor-react-native"
+import React from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { ProgressBar } from "../atoms/ProgressBar"
 
 interface VotingProgressProps {
   variant: "yes" | "no"

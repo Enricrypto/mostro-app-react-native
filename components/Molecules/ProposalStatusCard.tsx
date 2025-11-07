@@ -1,8 +1,9 @@
-import { Badge } from "@/components/atoms/Badge"
-import { Button } from "@/components/atoms/Button"
-import { ProgressBar } from "@/components/atoms/ProgressBar"
 import { ArrowRightIcon, ClockIcon } from "phosphor-react-native"
+import React from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { Badge } from "../atoms/Badge"
+import { Button } from "../atoms/Button"
+import { ProgressBar } from "../atoms/ProgressBar"
 
 interface ProposalStatusCardProps {
   proposal: {

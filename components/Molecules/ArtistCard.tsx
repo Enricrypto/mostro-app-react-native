@@ -1,8 +1,9 @@
-import { Avatar } from "@/components/atoms/Avatar"
-import { Badge } from "@/components/atoms/Badge"
-import { Button } from "@/components/atoms/Button"
 import { ArrowSquareOutIcon } from "phosphor-react-native"
+import React from "react"
 import { StyleSheet, Text, View } from "react-native"
+import { Avatar } from "../atoms/Avatar"
+import { Badge } from "../atoms/Badge"
+import { Button } from "../atoms/Button"
 
 interface ArtistCardProps {
   artist: {
@@ -17,10 +18,9 @@ interface ArtistCardProps {
     graduated: boolean
     change: string
   }
-  viewArtistIconColor?: string;
 }
 
-export const ArtistCard: React.FC<ArtistCardProps> = ({ artist, viewArtistIconColor }) => {
+export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -55,7 +55,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ artist, viewArtistIconCo
       <Button
         title='View Artist'
         variant='view-artist-no-bg'
-        icon={<ArrowSquareOutIcon size={24} color={viewArtistIconColor || '#71D6FB'} />}
+        icon={<ArrowSquareOutIcon size={24} color='#71D6FB' />}
       />
     </View>
   )

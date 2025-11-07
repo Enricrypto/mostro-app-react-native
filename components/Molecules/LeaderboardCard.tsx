@@ -1,5 +1,6 @@
-import { Avatar } from "@/components/atoms/Avatar"
+import React from "react"
 import { StyleSheet, Text, TouchableOpacity } from "react-native"
+import { Avatar } from "../atoms/Avatar"
 
 interface LeaderboardCardProps {
   rank: number
