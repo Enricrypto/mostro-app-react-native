@@ -4,14 +4,21 @@ import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
 import { Tooltip } from "@/components/atoms/Tooltip";
 import { ArtistCard } from "@/components/Molecules/ArtistCard";
 import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner";
+import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard";
 import { LeaderboardCard } from "@/components/Molecules/LeaderboardCard";
 import { MusicPlayer } from "@/components/Molecules/MusicPlayer";
 import { NewLaunchCard } from "@/components/Molecules/NewLaunchCard";
+import { PerksCard } from "@/components/Molecules/PerksCard";
 import { ProposalStatusCard } from "@/components/Molecules/ProposalStatusCard";
+import { SongCard } from "@/components/Molecules/SongCard";
+import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard";
 import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard";
+import { UpcomingEventCard } from "@/components/Molecules/UpcomingEventCard";
+import { Chart } from "@/components/Molecules/Chart";
+import { VotingHistoryCard, VotingHistoryCardProps } from "@/components/Molecules/VotingHistoryCard";
 import { FullArtistCard } from "@/components/Organisms/FullArtistCard";
-import { VotingSection } from "@/components/Organisms/VotingSection";
 import { StatsOverview } from "@/components/Organisms/StatsOverview"; // Added this line
+import { VotingSection } from "@/components/Organisms/VotingSection";
 import { ArrowUpIcon, CheckIcon } from "phosphor-react-native";
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
@@ -84,6 +91,64 @@ const proposal = {
   noPercentage: 25,
 };
 
+const votingHistoryCardData: VotingHistoryCardProps = {
+  title: "New Album Production",
+  userName: "John Doe",
+  timeAgo: "2 days ago",
+  voteStatus: "yes",
+  proposalStatus: "active",
+};
+
+const tokenHoldingsUserData = {
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  userName: "John Doe",
+  tokenCount: "125",
+  changePercentage: "+24%",
+  currentValue: "$794",
+  perksUnlocked: 2,
+};
+
+const songCardData = {
+  title: "Midnight Dreams",
+  subtitle: "Latest Single",
+  duration: "3:45",
+  tokenValue: "5 USDC = 500 Tokens",
+};
+
+const perksCardData = {
+  title: "Voting Power",
+  description: "Vote on Creative Decision",
+  rewards: "500 Tokens",
+};
+
+const featuredSongCardData = {
+  songTitle: "Midnight Dreams",
+  artistName: "Latest Single",
+  duration: "3:45",
+};
+
+const upcomingEventCardData = {
+  title: "Live in Berlin",
+  date: "Nov 15, 2025 at 8:00 PM",
+  location: "Berghain",
+};
+
+const chartData = {
+  labels: ["Jan 21", "Jan 22", "Jan 23", "Jan 24", "Jan 25"],
+  datasets: [
+    {
+      data: [
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+      ],
+    },
+  ],
+};
+
 export default function Index() {
   const [isConnected, setIsConnected] = useState(false);
   const address = "0xf87b32a4E926bA49a655a9B13111d348b508f953";
@@ -98,6 +163,10 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* SongCard Test */}
+      <View style={styles.row}>
+        <SongCard {...songCardData} onPressPlay={() => console.log('Play Song')} />
+      </View>
       {/* StatsOverview Test */}
       <View style={styles.row}>
         <StatsOverview title="Total Artists" mainStat="247" secondaryStat="+12 this week" />
@@ -157,6 +226,34 @@ export default function Index() {
       {/* ProposalStatusCard Test */}
       <View style={styles.row}>
         <ProposalStatusCard proposal={proposal} onViewProposal={() => console.log('View Proposal')} />
+      </View>
+      {/* VotingHistoryCard Test */}
+      <View style={styles.row}>
+        <VotingHistoryCard {...votingHistoryCardData} />
+      </View>
+      {/* TokenHoldingsUserCard Test */}
+      <View style={styles.row}>
+        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+      </View>
+      {/* PerksCard Test */}
+      <View style={styles.row}>
+        <PerksCard {...perksCardData} />
+      </View>
+      {/* FeaturedSongCard Test */}
+      <View style={styles.row}>
+        <FeaturedSongCard {...featuredSongCardData} onPressPlay={() => console.log('Play Featured Song')} />
+      </View>
+      {/* UpcomingEventCard Test */}
+      <View style={styles.row}>
+        <UpcomingEventCard
+          {...upcomingEventCardData}
+          onClaimAccess={() => console.log('Claim Access')}
+          onAddToCalendar={() => console.log('Add to Calendar')}
+        />
+      </View>
+      {/* Chart Test */}
+      <View style={styles.row}>
+        <Chart data={chartData} />
       </View>
       {/* Genre Profile */}
       <View style={styles.row}>

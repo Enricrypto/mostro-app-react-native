@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, findNodeHandle, LayoutChangeEvent } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, LayoutChangeEvent } from 'react-native';
 
 interface TooltipProps {
   content: string;

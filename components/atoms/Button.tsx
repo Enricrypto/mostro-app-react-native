@@ -31,6 +31,9 @@ type ButtonVariant =
   | "play-btn"
   | "skip-btn"
   | "back-btn"
+  | "status-badge"
+  | "play-circle"
+  | "play-featured"
 
 interface ButtonProps {
   title?: string
@@ -237,6 +240,44 @@ const variantStyles: Record<
       backgroundColor: "transparent",
       paddingHorizontal: 0,
       paddingVertical: 0
+    },
+    textStyle: { ...baseText, color: "#000000" }
+  },
+  "status-badge": {
+    style: {
+      ...baseButton,
+      minWidth: 80,
+      height: 32,
+      borderRadius: 16,
+      backgroundColor: "#B3B3B3",
+      paddingHorizontal: 12,
+      paddingVertical: 6
+    },
+    textStyle: { ...baseText, color: "#000000" }
+  },
+  "play-circle": {
+    style: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: "#71D6FB",
+      backgroundColor: "transparent",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 0,
+      paddingVertical: 0
+    },
+    textStyle: { ...baseText, color: "#FFFFFF" }
+  },
+  "play-featured": {
+    style: {
+      ...baseButton,
+      backgroundColor: "#71D6FB",
+      borderRadius: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      minWidth: 100,
     },
     textStyle: { ...baseText, color: "#000000" }
   }
