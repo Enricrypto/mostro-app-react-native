@@ -1,4 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient"
+import React from "react"
 import { Text, TextStyle, View, ViewStyle } from "react-native"
 
 type BadgeVariant =
@@ -11,6 +12,7 @@ type BadgeVariant =
   | "red"
   | "tokens-info"
   | "featured-artist"
+  | "song-token-info"
 
 interface BadgeProps {
   variant?: BadgeVariant
@@ -69,8 +71,9 @@ export function Badge({
       height: 28,
       borderRadius: 28,
       paddingVertical: 4,
-      paddingHorizontal: 12
-    }
+      paddingHorizontal: 12,
+    },
+    "song-token-info": createBadgeStyle("#B3B3B3", "rgba(179, 179, 179, 0.3)"),
   }
 
   const textColors: Record<BadgeVariant, string> = {
@@ -82,7 +85,8 @@ export function Badge({
     green: "#DCFD63",
     red: "#FD6363",
     "tokens-info": "#42EE5C",
-    "featured-artist": "#000000"
+    "featured-artist": "#000000",
+    "song-token-info": "#FFFFFF",
   }
 
   const textBase: TextStyle = {
