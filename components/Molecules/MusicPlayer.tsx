@@ -1,69 +1,74 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { Pause, Play, SkipBack, SkipForward } from "phosphor-react-native";
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Avatar } from "../atoms/Avatar";
-import { Button } from "../atoms/Button";
-import { SeekBar } from "../atoms/SeekBar";
+import { Avatar } from "@/components/atoms/Avatar"
+import { Button } from "@/components/atoms/Button"
+import { SeekBar } from "@/components/atoms/SeekBar"
+import { LinearGradient } from "expo-linear-gradient"
+import {
+  PauseIcon,
+  PlayIcon,
+  SkipBackIcon,
+  SkipForwardIcon
+} from "phosphor-react-native"
+import { useEffect, useState } from "react"
+import { StyleSheet, Text, View } from "react-native"
 
 interface Track {
-  title: string;
-  subtitle: string;
-  imageUrl: any;
-  duration: number;
+  title: string
+  subtitle: string
+  imageUrl: any
+  duration: number
 }
 
 interface MusicPlayerProps {
-  track: Track;
+  track: Track
 }
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ track }) => {
-  const [seekValue, setSeekValue] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [seekValue, setSeekValue] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | undefined;
+    let interval: ReturnType<typeof setInterval> | undefined
 
     if (isPlaying) {
       interval = setInterval(() => {
-        setSeekValue(prevValue => {
+        setSeekValue((prevValue) => {
           if (prevValue < track.duration) {
-            return prevValue + 1;
+            return prevValue + 1
           } else {
-            setIsPlaying(false);
-            return prevValue;
+            setIsPlaying(false)
+            return prevValue
           }
-        });
-      }, 1000);
+        })
+      }, 1000)
     }
 
     return () => {
       if (interval) {
-        clearInterval(interval);
+        clearInterval(interval)
       }
-    };
-  }, [isPlaying, track.duration]);
+    }
+  }, [isPlaying, track.duration])
 
   const handlePlayPause = () => {
     if (seekValue >= track.duration) {
-      setSeekValue(0);
-      setIsPlaying(true);
+      setSeekValue(0)
+      setIsPlaying(true)
     } else {
-      setIsPlaying(!isPlaying);
+      setIsPlaying(!isPlaying)
     }
-  };
+  }
 
   const handleSeek = (value: number) => {
-    setSeekValue(value);
-  };
+    setSeekValue(value)
+  }
 
   const handleNext = () => {
-    setSeekValue(v => Math.min(v + 10, track.duration));
-  };
+    setSeekValue((v) => Math.min(v + 10, track.duration))
+  }
 
   const handlePrevious = () => {
-    setSeekValue(v => Math.max(v - 10, 0));
-  };
+    setSeekValue((v) => Math.max(v - 10, 0))
+  }
 
   return (
     <LinearGradient
@@ -74,28 +79,50 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ track }) => {
     >
       <View style={styles.container}>
         <View style={styles.topRow}>
-          <Avatar src={track.imageUrl} variant="small-rounded" />
+          <Avatar src={track.imageUrl} variant='small-rounded' />
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{track.title}</Text>
             <Text style={styles.subtitle}>{track.subtitle}</Text>
           </View>
           <View style={styles.controls}>
-            <Button variant="back-btn" onPress={handlePrevious} icon={<SkipBack size={32} color="#000" weight="regular" />} />
-            <Button variant="play-btn" onPress={handlePlayPause} icon={isPlaying ? <Pause size={24} color="#fff" weight="regular" /> : <Play size={24} color="#fff" weight="regular" />} />
-            <Button variant="skip-btn" onPress={handleNext} icon={<SkipForward size={32} color="#000" weight="regular" />} />
+            <Button
+              variant='back-btn'
+              onPress={handlePrevious}
+              icon={<SkipBackIcon size={32} color='#000' weight='regular' />}
+            />
+            <Button
+              variant='play-btn'
+              onPress={handlePlayPause}
+              icon={
+                isPlaying ? (
+                  <PauseIcon size={24} color='#fff' weight='regular' />
+                ) : (
+                  <PlayIcon size={24} color='#fff' weight='regular' />
+                )
+              }
+            />
+            <Button
+              variant='skip-btn'
+              onPress={handleNext}
+              icon={<SkipForwardIcon size={32} color='#000' weight='regular' />}
+            />
           </View>
         </View>
-        <SeekBar duration={track.duration} value={seekValue} onValueChange={handleSeek} />
+        <SeekBar
+          duration={track.duration}
+          value={seekValue}
+          onValueChange={handleSeek}
+        />
       </View>
     </LinearGradient>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   gradient: {
     borderRadius: 24,
     padding: 20,
-    width: '100%',
+    width: "100%"
   },
   container: {
     // The container inside the gradient doesn't need much styling
@@ -103,25 +130,25 @@ const styles = StyleSheet.create({
   topRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 16,
+    marginBottom: 16
   },
   titleContainer: {
     flex: 1,
-    marginLeft: 16,
+    marginLeft: 16
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#000",
+    color: "#000"
   },
   subtitle: {
     fontSize: 14,
     color: "#000",
-    opacity: 0.7,
+    opacity: 0.7
   },
   controls: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-  },
-});
+    gap: 12
+  }
+})

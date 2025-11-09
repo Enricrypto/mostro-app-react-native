@@ -1,41 +1,40 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Avatar } from "../atoms/Avatar";
-import { Badge } from "../atoms/Badge";
-import { Button } from "../atoms/Button";
-import { ArrowSquareOut } from "phosphor-react-native";
+import { Avatar } from "@/components/atoms/Avatar"
+import { Badge } from "@/components/atoms/Badge"
+import { Button } from "@/components/atoms/Button"
+import { ArrowSquareOutIcon } from "phosphor-react-native"
+import { StyleSheet, Text, View } from "react-native"
 
 interface ArtistCardProps {
   artist: {
-    name: string;
-    tokenName: string;
-    avatarUrl: string;
-    genre: string;
-    description: string;
-    holders: string;
-    marketCap: string;
-    totalSupply: string;
-    graduated: boolean;
-    change: string;
-  };
+    name: string
+    tokenName: string
+    avatarUrl: string
+    genre: string
+    description: string
+    holders: string
+    marketCap: string
+    totalSupply: string
+    graduated: boolean
+    change: string
+  }
 }
 
 export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
-        <Avatar src={artist.avatarUrl} variant="medium-square" />
+        <Avatar src={artist.avatarUrl} variant='medium-square' />
         <View style={styles.artistInfo}>
           <Text style={styles.artistName}>{artist.name}</Text>
           <Text style={styles.tokenName}>{artist.tokenName}</Text>
           <View style={styles.badgeRow}>
-            {artist.graduated && <Badge variant="neutral">Graduated</Badge>}
-            <Badge variant="green">{artist.change}</Badge>
+            {artist.graduated && <Badge variant='neutral'>Graduated</Badge>}
+            <Badge variant='green'>{artist.change}</Badge>
           </View>
         </View>
       </View>
       <View style={styles.genreRow}>
-        <Badge variant="genre-profile">{artist.genre}</Badge>
+        <Badge variant='genre-profile'>{artist.genre}</Badge>
       </View>
       <Text style={styles.description}>{artist.description}</Text>
       <View style={styles.statsRow}>
@@ -53,67 +52,67 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
         </View>
       </View>
       <Button
-        title="View Artist"
-        variant="view-artist-no-bg"
-        icon={<ArrowSquareOut size={24} color="#71D6FB" />}
+        title='View Artist'
+        variant='view-artist-no-bg'
+        icon={<ArrowSquareOutIcon size={24} color='#71D6FB' />}
       />
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#0A111F',
+    backgroundColor: "#0A111F",
     borderRadius: 16,
     padding: 24,
-    width: '100%',
+    width: "100%"
   },
   topRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16
   },
   artistInfo: {
-    marginLeft: 16,
+    marginLeft: 16
   },
   artistName: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold"
   },
   tokenName: {
-    color: '#B3B3B3',
-    fontSize: 16,
+    color: "#B3B3B3",
+    fontSize: 16
   },
   badgeRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
-    marginTop: 8,
+    marginTop: 8
   },
   genreRow: {
     marginBottom: 16,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start"
   },
   description: {
-    color: '#B3B3B3',
+    color: "#B3B3B3",
     fontSize: 14,
-    marginBottom: 24,
+    marginBottom: 24
   },
   statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 24,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 24
   },
   stat: {
-    alignItems: 'center',
+    alignItems: "center"
   },
   statValue: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold"
   },
   statLabel: {
-    color: '#B3B3B3',
-    fontSize: 12,
-  },
-});
+    color: "#B3B3B3",
+    fontSize: 12
+  }
+})
