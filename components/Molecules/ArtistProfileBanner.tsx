@@ -1,8 +1,7 @@
+import { Avatar } from "@/components/atoms/Avatar"
+import { Button } from "@/components/atoms/Button"
 import { ArrowUpRightIcon } from "phosphor-react-native"
-import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { Avatar } from "../atoms/Avatar"
-import { Button } from "../atoms/Button"
 
 interface ArtistProfileBannerProps {
   artist: {

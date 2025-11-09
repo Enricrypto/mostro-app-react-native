@@ -1,7 +1,6 @@
-import React from "react"
+import { Avatar } from "@/components/atoms/Avatar"
+import { Badge } from "@/components/atoms/Badge"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { Avatar } from "../atoms/Avatar"
-import { Badge } from "../atoms/Badge"
 
 interface TrendingTokenCardProps {
   token: {

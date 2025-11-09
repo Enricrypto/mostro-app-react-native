@@ -1,53 +1,70 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, LayoutChangeEvent } from 'react-native';
+import { useRef, useState } from "react"
+import {
+  LayoutChangeEvent,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native"
 
 interface TooltipProps {
-  content: string;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  delay?: number;
-  children: React.ReactElement;
+  content: string
+  position?: "top" | "bottom" | "left" | "right"
+  delay?: number
+  children: React.ReactElement
 }
 
-export const Tooltip: React.FC<TooltipProps> = ({ content, position = 'top', delay = 0, children }) => {
-  const [visible, setVisible] = useState(false);
-  const [tooltipLayout, setTooltipLayout] = useState({ x: 0, y: 0, width: 0, height: 0 });
-  const childRef = useRef<View>(null);
+export const Tooltip: React.FC<TooltipProps> = ({
+  content,
+  position = "top",
+  delay = 0,
+  children
+}) => {
+  const [visible, setVisible] = useState(false)
+  const [tooltipLayout, setTooltipLayout] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  })
+  const childRef = useRef<View>(null)
 
   const onLayout = (event: LayoutChangeEvent) => {
-    const { x, y, width, height } = event.nativeEvent.layout;
-    setTooltipLayout({ x, y, width, height });
-  };
+    const { x, y, width, height } = event.nativeEvent.layout
+    setTooltipLayout({ x, y, width, height })
+  }
 
   const handleLongPressIn = () => {
-    setTimeout(() => setVisible(true), delay);
-  };
+    setTimeout(() => setVisible(true), delay)
+  }
 
   const handleLongPressOut = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
 
   const getTooltipPosition = () => {
-    const tooltipStyle: any = {};
+    const tooltipStyle: any = {}
     switch (position) {
-      case 'top':
-        tooltipStyle.top = tooltipLayout.y - 50;
-        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width / 2 - 50;
-        break;
-      case 'bottom':
-        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height;
-        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width / 2 - 50;
-        break;
-      case 'left':
-        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height / 2 - 25;
-        tooltipStyle.left = tooltipLayout.x - 110;
-        break;
-      case 'right':
-        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height / 2 - 25;
-        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width;
-        break;
+      case "top":
+        tooltipStyle.top = tooltipLayout.y - 50
+        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width / 2 - 50
+        break
+      case "bottom":
+        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height
+        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width / 2 - 50
+        break
+      case "left":
+        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height / 2 - 25
+        tooltipStyle.left = tooltipLayout.x - 110
+        break
+      case "right":
+        tooltipStyle.top = tooltipLayout.y + tooltipLayout.height / 2 - 25
+        tooltipStyle.left = tooltipLayout.x + tooltipLayout.width
+        break
     }
-    return tooltipStyle;
-  };
+    return tooltipStyle
+  }
 
   return (
     <View>
@@ -60,30 +77,33 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, position = 'top', del
       >
         {children}
       </TouchableOpacity>
-      <Modal visible={visible} transparent animationType="fade">
-        <TouchableOpacity style={styles.modalContainer} onPress={() => setVisible(false)}>
+      <Modal visible={visible} transparent animationType='fade'>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          onPress={() => setVisible(false)}
+        >
           <View style={[styles.tooltip, getTooltipPosition()]}>
             <Text style={styles.tooltipText}>{content}</Text>
           </View>
         </TouchableOpacity>
       </Modal>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   modalContainer: {
-    flex: 1,
+    flex: 1
   },
   tooltip: {
-    position: 'absolute',
-    backgroundColor: 'black',
+    position: "absolute",
+    backgroundColor: "black",
     borderRadius: 5,
     padding: 10,
     width: 100,
-    alignItems: 'center',
+    alignItems: "center"
   },
   tooltipText: {
-    color: 'white',
-  },
-});
+    color: "white"
+  }
+})

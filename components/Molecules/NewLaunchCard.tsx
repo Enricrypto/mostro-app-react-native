@@ -1,9 +1,8 @@
+import { Avatar } from "@/components/atoms/Avatar"
+import { Badge } from "@/components/atoms/Badge"
+import { Button } from "@/components/atoms/Button"
 import { ArrowUpRightIcon, CalendarBlankIcon } from "phosphor-react-native"
-import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { Avatar } from "../atoms/Avatar"
-import { Badge } from "../atoms/Badge"
-import { Button } from "../atoms/Button"
 
 interface NewLaunchCardProps {
   token: {

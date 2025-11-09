@@ -1,3 +1,6 @@
+import { Avatar } from "@/components/atoms/Avatar"
+import { Button } from "@/components/atoms/Button"
+import { SeekBar } from "@/components/atoms/SeekBar"
 import { LinearGradient } from "expo-linear-gradient"
 import {
   PauseIcon,
@@ -5,11 +8,8 @@ import {
   SkipBackIcon,
   SkipForwardIcon
 } from "phosphor-react-native"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { Avatar } from "../atoms/Avatar"
-import { Button } from "../atoms/Button"
-import { SeekBar } from "../atoms/SeekBar"
 
 interface Track {
   title: string

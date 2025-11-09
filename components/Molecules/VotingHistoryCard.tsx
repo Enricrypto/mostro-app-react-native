@@ -1,14 +1,13 @@
-import { ThumbsUp } from "phosphor-react-native";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Badge } from "../atoms/Badge";
+import { Badge } from "@/components/atoms/Badge"
+import { ThumbsUpIcon } from "phosphor-react-native"
+import { StyleSheet, Text, View } from "react-native"
 
 export interface VotingHistoryCardProps {
-  title: string;
-  userName: string;
-  timeAgo: string;
-  voteStatus: "yes" | "no"; // Assuming 'yes' or 'no' based on the image
-  proposalStatus: "active" | "closed"; // Assuming 'active' or 'closed'
+  title: string
+  userName: string
+  timeAgo: string
+  voteStatus: "yes" | "no" // Assuming 'yes' or 'no' based on the image
+  proposalStatus: "active" | "closed" // Assuming 'active' or 'closed'
 }
 
 export const VotingHistoryCard: React.FC<VotingHistoryCardProps> = ({
@@ -16,7 +15,7 @@ export const VotingHistoryCard: React.FC<VotingHistoryCardProps> = ({
   userName,
   timeAgo,
   voteStatus,
-  proposalStatus,
+  proposalStatus
 }) => {
   return (
     <View style={styles.container}>
@@ -24,11 +23,14 @@ export const VotingHistoryCard: React.FC<VotingHistoryCardProps> = ({
         <Text style={styles.title}>{title}</Text>
         <View style={styles.buttonsContainer}>
           {voteStatus === "yes" && (
-            <Badge variant="green" icon={<ThumbsUp size={12} color="#fff" />}>
+            <Badge
+              variant='green'
+              icon={<ThumbsUpIcon size={12} color='#fff' />}
+            >
               Yes
             </Badge>
           )}
-          <Badge variant="neutral">
+          <Badge variant='neutral'>
             {proposalStatus === "active" ? "Active" : "Closed"}
           </Badge>
         </View>
@@ -36,21 +38,21 @@ export const VotingHistoryCard: React.FC<VotingHistoryCardProps> = ({
       <Text style={styles.userName}>{userName}</Text>
       <Text style={styles.timeAgo}>{timeAgo}</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#0A111F",
     borderRadius: 16,
     padding: 24,
-    width: "100%",
+    width: "100%"
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start", // Changed to flex-start to align buttons to the top
-    marginBottom: 8,
+    marginBottom: 8
   },
   title: {
     color: "#FFFFFF",
@@ -58,20 +60,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     // Removed flexShrink: 1 to prevent excessive shrinking
     marginRight: 10, // Space between title and buttons
-    flex: 1, // Allow title to take available space
+    flex: 1 // Allow title to take available space
   },
   buttonsContainer: {
     flexDirection: "column",
     alignItems: "flex-end",
-    gap: 8,
+    gap: 8
   },
   userName: {
     color: "#B3B3B3",
     fontSize: 16,
-    marginBottom: 4,
+    marginBottom: 4
   },
   timeAgo: {
     color: "#B3B3B3",
-    fontSize: 14,
-  },
-});
+    fontSize: 14
+  }
+})
