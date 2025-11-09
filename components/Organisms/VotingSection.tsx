@@ -1,39 +1,49 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { VotingProgress } from "../Molecules/VotingProgress";
-import { Button } from "../atoms/Button";
-import { ThumbsUp, ThumbsDown } from "phosphor-react-native";
+import { Button } from "@/components/atoms/Button"
+import { VotingProgress } from "@/components/molecules/VotingProgress"
+import { ThumbsDownIcon, ThumbsUpIcon } from "phosphor-react-native"
+import { useState } from "react"
+import { StyleSheet, Text, View } from "react-native"
 
 export const VotingSection: React.FC = () => {
-  const [yesVotes, setYesVotes] = useState(125);
-  const [noVotes, setNoVotes] = useState(23);
+  const [yesVotes, setYesVotes] = useState(125)
+  const [noVotes, setNoVotes] = useState(23)
 
-  const totalVotes = yesVotes + noVotes;
+  const totalVotes = yesVotes + noVotes
 
   const handleVoteYes = () => {
-    setYesVotes(yesVotes + 1);
-  };
+    setYesVotes(yesVotes + 1)
+  }
 
   const handleVoteNo = () => {
-    setNoVotes(noVotes + 1);
-  };
+    setNoVotes(noVotes + 1)
+  }
 
   return (
     <View style={styles.container}>
-      <VotingProgress variant="yes" value={yesVotes} max={totalVotes} votes={yesVotes} />
-      <VotingProgress variant="no" value={noVotes} max={totalVotes} votes={noVotes} />
+      <VotingProgress
+        variant='yes'
+        value={yesVotes}
+        max={totalVotes}
+        votes={yesVotes}
+      />
+      <VotingProgress
+        variant='no'
+        value={noVotes}
+        max={totalVotes}
+        votes={noVotes}
+      />
       <View style={styles.buttonContainer}>
         <Button
-          title="Vote Yes"
-          variant="vote-yes"
+          title='Vote Yes'
+          variant='vote-yes'
           onPress={handleVoteYes}
-          icon={<ThumbsUp size={24} color="#000" weight="bold" />}
+          icon={<ThumbsUpIcon size={24} color='#000' weight='bold' />}
         />
         <Button
-          title="Vote No"
-          variant="vote-no"
+          title='Vote No'
+          variant='vote-no'
           onPress={handleVoteNo}
-          icon={<ThumbsDown size={24} color="#FD6363" weight="bold" />}
+          icon={<ThumbsDownIcon size={24} color='#FD6363' weight='bold' />}
         />
       </View>
       <View style={styles.divider} />
@@ -48,35 +58,35 @@ export const VotingSection: React.FC = () => {
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     padding: 16,
-    backgroundColor: '#1A1A1A', // Assuming a dark background from the image
-    borderRadius: 16,
+    backgroundColor: "#1A1A1A", // Assuming a dark background from the image
+    borderRadius: 16
   },
   buttonContainer: {
     marginTop: 16,
-    gap: 12,
+    gap: 12
   },
   divider: {
     height: 1,
-    backgroundColor: '#333',
-    marginVertical: 24,
+    backgroundColor: "#333",
+    marginVertical: 24
   },
   infoContainer: {
-    gap: 8,
+    gap: 8
   },
   infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   infoText: {
-    color: '#8A8A8A',
-    fontSize: 16,
-  },
-});
+    color: "#8A8A8A",
+    fontSize: 16
+  }
+})

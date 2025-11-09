@@ -1,16 +1,15 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Avatar } from "../atoms/Avatar";
-import { Badge } from "../atoms/Badge";
-import { Medal } from "phosphor-react-native"; // Using Medal icon for "Perks Unlocked"
+import { Avatar } from "@/components/atoms/Avatar"
+import { Badge } from "@/components/atoms/Badge"
+import { MedalIcon } from "phosphor-react-native" // Using Medal icon for "Perks Unlocked"
+import { StyleSheet, Text, View } from "react-native"
 
 interface TokenHoldingsUserCardProps {
-  avatarUrl: string;
-  userName: string;
-  tokenCount: string;
-  changePercentage: string;
-  currentValue: string;
-  perksUnlocked: number;
+  avatarUrl: string
+  userName: string
+  tokenCount: string
+  changePercentage: string
+  currentValue: string
+  perksUnlocked: number
 }
 
 export const TokenHoldingsUserCard: React.FC<TokenHoldingsUserCardProps> = ({
@@ -19,18 +18,20 @@ export const TokenHoldingsUserCard: React.FC<TokenHoldingsUserCardProps> = ({
   tokenCount,
   changePercentage,
   currentValue,
-  perksUnlocked,
+  perksUnlocked
 }) => {
   return (
     <View style={styles.container}>
       {/* Top Section */}
       <View style={styles.topSection}>
-        <Avatar src={avatarUrl} variant="medium-square" />
+        <Avatar src={avatarUrl} variant='medium-square' />
         <View style={styles.userInfo}>
           <Text style={styles.userName}>{userName}</Text>
           <Text style={styles.tokenCount}>{tokenCount} tokens</Text>
         </View>
-        <Badge variant="green" style={styles.badge}>{changePercentage}</Badge>
+        <Badge variant='green' style={styles.badge}>
+          {changePercentage}
+        </Badge>
       </View>
 
       {/* Divider */}
@@ -44,69 +45,69 @@ export const TokenHoldingsUserCard: React.FC<TokenHoldingsUserCardProps> = ({
         </View>
         <View style={styles.statItem}>
           <View style={styles.perksContainer}>
-            <Medal size={24} color="#71D6FB" />
+            <MedalIcon size={24} color='#71D6FB' />
             <Text style={styles.statValue}>{perksUnlocked}</Text>
           </View>
           <Text style={styles.statLabel}>Perks Unlocked</Text>
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#0A111F",
     borderRadius: 16,
     padding: 24,
-    width: "100%",
+    width: "100%"
   },
   topSection: {
     flexDirection: "row",
     alignItems: "flex-start", // Align items to the top
-    marginBottom: 20,
+    marginBottom: 20
   },
   userInfo: {
     flex: 1,
     marginLeft: 16,
-    justifyContent: "center", // Vertically center name and token count
+    justifyContent: "center" // Vertically center name and token count
   },
   userName: {
     color: "#FFFFFF",
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   tokenCount: {
     color: "#B3B3B3",
-    fontSize: 14,
+    fontSize: 14
   },
   badge: {
-    alignSelf: "flex-start", // Align badge to the top
+    alignSelf: "flex-start" // Align badge to the top
   },
   divider: {
     height: 1,
     backgroundColor: "#2D3953",
-    marginVertical: 20,
+    marginVertical: 20
   },
   bottomSection: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   statItem: {
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
   statValue: {
     color: "#FFFFFF",
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   statLabel: {
     color: "#B3B3B3",
-    fontSize: 14,
+    fontSize: 14
   },
   perksContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 4,
-  },
-});
+    gap: 4
+  }
+})

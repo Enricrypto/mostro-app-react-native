@@ -1,47 +1,54 @@
-import React from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar } from "../atoms/Avatar";
+import { Avatar } from "@/components/atoms/Avatar"
+import { StyleSheet, Text, TouchableOpacity } from "react-native"
 
 interface LeaderboardCardProps {
-  rank: number;
+  rank: number
   user: {
-    name: string;
-    avatarUrl: string;
-  };
-  onPress?: () => void;
+    name: string
+    avatarUrl: string
+  }
+  onPress?: () => void
 }
 
-export const LeaderboardCard: React.FC<LeaderboardCardProps> = ({ rank, user, onPress }) => {
+export const LeaderboardCard: React.FC<LeaderboardCardProps> = ({
+  rank,
+  user,
+  onPress
+}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.container}
+      activeOpacity={0.8}
+    >
       <Text style={styles.rank}>#{rank}</Text>
-      <Avatar src={user.avatarUrl} variant="small-rounded" />
+      <Avatar src={user.avatarUrl} variant='small-rounded' />
       <Text style={styles.username}>{user.name}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#0A111F',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#0A111F",
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#6C5CE7',
+    borderColor: "#6C5CE7",
     paddingVertical: 12,
     paddingHorizontal: 16,
-    width: '100%',
+    width: "100%"
   },
   rank: {
-    color: '#B3B3B3',
+    color: "#B3B3B3",
     fontSize: 18,
-    fontWeight: 'bold',
-    marginRight: 16,
+    fontWeight: "bold",
+    marginRight: 16
   },
   username: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
-    marginLeft: 12,
-  },
-});
+    marginLeft: 12
+  }
+})

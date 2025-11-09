@@ -1,17 +1,16 @@
-import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
-import { LineChart } from "react-native-chart-kit";
+import { Dimensions, StyleSheet, View } from "react-native"
+import { LineChart } from "react-native-chart-kit"
 
-const screenWidth = Dimensions.get("window").width;
+const screenWidth = Dimensions.get("window").width
 
 interface ChartProps {
   data: {
-    labels: string[];
+    labels: string[]
     datasets: {
-      data: number[];
-    }[];
-  };
-  onDataPointClick?: (data: any) => void;
+      data: number[]
+    }[]
+  }
+  onDataPointClick?: (data: any) => void
 }
 
 export const Chart: React.FC<ChartProps> = ({ data, onDataPointClick }) => {
@@ -24,13 +23,13 @@ export const Chart: React.FC<ChartProps> = ({ data, onDataPointClick }) => {
     labelColor: (opacity = 1) => `rgba(200, 200, 200, ${opacity})`,
     strokeWidth: 3,
     propsForDots: {
-      r: "0",
+      r: "0"
     },
     propsForBackgroundLines: {
       strokeDasharray: "4 4",
-      stroke: "rgba(255, 255, 255, 0.15)",
-    },
-  };
+      stroke: "rgba(255, 255, 255, 0.15)"
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -49,8 +48,8 @@ export const Chart: React.FC<ChartProps> = ({ data, onDataPointClick }) => {
         onDataPointClick={onDataPointClick}
       />
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -62,9 +61,9 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 8,
-    elevation: 3,
+    elevation: 3
   },
   chartStyle: {
-    borderRadius: 12,
-  },
-});
+    borderRadius: 12
+  }
+})
