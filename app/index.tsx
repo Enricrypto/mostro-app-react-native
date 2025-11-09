@@ -1,9 +1,24 @@
 import { Badge } from "@/components/atoms/Badge";
 import { ConnectButton } from "@/components/atoms/ConnectButton";
 import { LoadingSpinner } from "@/components/atoms/LoadingSpinner";
-import { ProgressBar } from "@/components/atoms/ProgressBar";
-import { SeekBar } from "@/components/atoms/SeekBar";
 import { Tooltip } from "@/components/atoms/Tooltip";
+import { ArtistCard } from "@/components/Molecules/ArtistCard";
+import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner";
+import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard";
+import { LeaderboardCard } from "@/components/Molecules/LeaderboardCard";
+import { MusicPlayer } from "@/components/Molecules/MusicPlayer";
+import { NewLaunchCard } from "@/components/Molecules/NewLaunchCard";
+import { PerksCard } from "@/components/Molecules/PerksCard";
+import { ProposalStatusCard } from "@/components/Molecules/ProposalStatusCard";
+import { SongCard } from "@/components/Molecules/SongCard";
+import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard";
+import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard";
+import { UpcomingEventCard } from "@/components/Molecules/UpcomingEventCard";
+import { Chart } from "@/components/Molecules/Chart";
+import { VotingHistoryCard, VotingHistoryCardProps } from "@/components/Molecules/VotingHistoryCard";
+import { FullArtistCard } from "@/components/Organisms/FullArtistCard";
+import { StatsOverview } from "@/components/Organisms/StatsOverview"; // Added this line
+import { VotingSection } from "@/components/Organisms/VotingSection";
 import { ArrowUpIcon, CheckIcon } from "phosphor-react-native";
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
@@ -11,8 +26,127 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 const track = {
   title: "Burning Up",
   subtitle: "Liz Cherry",
-  imageUrl: require("../assets/images/liz-cherry/1. Liz Cherry - Burning Up.jpg"),
+  imageUrl: "https://images.unsplash.com/photo-1551180452-aea351b23949?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
   duration: 180,
+};
+
+const artist = {
+  name: "Luna Eclipse",
+  tokenName: "$MLuna",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  genre: "Jazz Fusion",
+  description: "Experimental electronic artist pushing boundaries with immersive soundscapes and innovative production...",
+  holders: "1,247",
+  marketCap: "$155K",
+  totalSupply: "100K",
+  graduated: true,
+  change: "+24%",
+};
+
+const fullArtist = {
+  name: "Luna Eclipse",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  genre: "Electronic",
+  description: "Experimental electronic artist pushing boundaries with immersive soundscapes and innovative production techniques. Known for sold-out shows across Europe.",
+  token: "$MARTIST",
+  price: "$12.45",
+  holders: "1,247",
+};
+
+const leaderboardUser = {
+  name: "mostrofan.eth",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG0by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+};
+
+const newLaunchToken = {
+  artistName: "John Doe",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  genre: "RnB & Hip Hop",
+  launchDate: "in 2 days",
+  initialPrice: "$ 1.00",
+  totalSupply: "10K",
+};
+
+const trendingToken = {
+  artistName: "John Doe",
+  tokenName: "$MDoes",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  price: "$ 3.45",
+  change: "+24%",
+};
+
+const artistProfile = {
+  name: "Luna Eclipse",
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  description: "Experimental electronic artist pushing boundaries with immersive soundscapes and innovative production techniques. Known for sold-out shows across Europe.",
+  tokenHolders: "1.2K+",
+  marketCap: "$155K",
+  loremIpsum: "---",
+};
+
+const proposal = {
+  title: "Proposal Title",
+  requesting: "Requesting 1000 $TOKEN for project X",
+  yesPercentage: 75,
+  noPercentage: 25,
+};
+
+const votingHistoryCardData: VotingHistoryCardProps = {
+  title: "New Album Production",
+  userName: "John Doe",
+  timeAgo: "2 days ago",
+  voteStatus: "yes",
+  proposalStatus: "active",
+};
+
+const tokenHoldingsUserData = {
+  avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+  userName: "John Doe",
+  tokenCount: "125",
+  changePercentage: "+24%",
+  currentValue: "$794",
+  perksUnlocked: 2,
+};
+
+const songCardData = {
+  title: "Midnight Dreams",
+  subtitle: "Latest Single",
+  duration: "3:45",
+  tokenValue: "5 USDC = 500 Tokens",
+};
+
+const perksCardData = {
+  title: "Voting Power",
+  description: "Vote on Creative Decision",
+  rewards: "500 Tokens",
+};
+
+const featuredSongCardData = {
+  songTitle: "Midnight Dreams",
+  artistName: "Latest Single",
+  duration: "3:45",
+};
+
+const upcomingEventCardData = {
+  title: "Live in Berlin",
+  date: "Nov 15, 2025 at 8:00 PM",
+  location: "Berghain",
+};
+
+const chartData = {
+  labels: ["Jan 21", "Jan 22", "Jan 23", "Jan 24", "Jan 25"],
+  datasets: [
+    {
+      data: [
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+        Math.random() * 10000 + 2000,
+      ],
+    },
+  ],
 };
 
 export default function Index() {
@@ -29,6 +163,14 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* SongCard Test */}
+      <View style={styles.row}>
+        <SongCard {...songCardData} onPressPlay={() => console.log('Play Song')} />
+      </View>
+      {/* StatsOverview Test */}
+      <View style={styles.row}>
+        <StatsOverview title="Total Artists" mainStat="247" secondaryStat="+12 this week" />
+      </View>
       {/* Connect Button Test */}
       <View style={styles.row}>
         <ConnectButton
@@ -45,8 +187,7 @@ export default function Index() {
       </View>
       {/* ProgressBar Test */}
       <View style={styles.row}>
-        <ProgressBar variant="yes" value={125} max={158} votes={125} />
-        <ProgressBar variant="no" value={33} max={158} votes={33} />
+        <VotingSection />
       </View>
       {/* Tooltip Test */}
       <View style={styles.row}>
@@ -54,9 +195,65 @@ export default function Index() {
           <Text style={{ color: '#ffffffff' }} >Press me for a tooltip</Text>
         </Tooltip>
       </View>
-      {/* SeekBar Test */}
+      {/* MusicPlayer Test */}
       <View style={styles.row}>
-        <SeekBar track={track} />
+        <MusicPlayer track={track} />
+      </View>
+      {/* ArtistCard Test */}
+      <View style={styles.row}>
+        <ArtistCard artist={artist} />
+      </View>
+      {/* FullArtistCard Test */}
+      <View style={styles.row}>
+        <FullArtistCard artist={fullArtist} />
+      </View>
+      {/* LeaderboardCard Test */}
+      <View style={styles.row}>
+        <LeaderboardCard rank={1} user={leaderboardUser} />
+      </View>
+      {/* NewLaunchCard Test */}
+      <View style={styles.row}>
+        <NewLaunchCard token={newLaunchToken} onViewArtist={() => console.log('View Artist')} />
+      </View>
+      {/* TrendingTokenCard Test */}
+      <View style={styles.row}>
+        <TrendingTokenCard token={trendingToken} onPress={() => console.log('Pressed')} />
+      </View>
+      {/* ArtistProfileBanner Test */}
+      <View style={styles.row}>
+        <ArtistProfileBanner artist={artistProfile} onViewArtist={() => console.log('View Artist')} />
+      </View>
+      {/* ProposalStatusCard Test */}
+      <View style={styles.row}>
+        <ProposalStatusCard proposal={proposal} onViewProposal={() => console.log('View Proposal')} />
+      </View>
+      {/* VotingHistoryCard Test */}
+      <View style={styles.row}>
+        <VotingHistoryCard {...votingHistoryCardData} />
+      </View>
+      {/* TokenHoldingsUserCard Test */}
+      <View style={styles.row}>
+        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+      </View>
+      {/* PerksCard Test */}
+      <View style={styles.row}>
+        <PerksCard {...perksCardData} />
+      </View>
+      {/* FeaturedSongCard Test */}
+      <View style={styles.row}>
+        <FeaturedSongCard {...featuredSongCardData} onPressPlay={() => console.log('Play Featured Song')} />
+      </View>
+      {/* UpcomingEventCard Test */}
+      <View style={styles.row}>
+        <UpcomingEventCard
+          {...upcomingEventCardData}
+          onClaimAccess={() => console.log('Claim Access')}
+          onAddToCalendar={() => console.log('Add to Calendar')}
+        />
+      </View>
+      {/* Chart Test */}
+      <View style={styles.row}>
+        <Chart data={chartData} />
       </View>
       {/* Genre Profile */}
       <View style={styles.row}>

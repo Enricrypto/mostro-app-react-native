@@ -11,6 +11,8 @@ type BadgeVariant =
   | "green"
   | "red"
   | "tokens-info"
+  | "featured-artist"
+  | "song-token-info"
 
 interface BadgeProps {
   variant?: BadgeVariant
@@ -64,7 +66,14 @@ export function Badge({
       paddingVertical: 6,
       paddingHorizontal: 8,
       backgroundColor: "rgba(66,238,92,0.3)"
-    }
+    },
+    "featured-artist": {
+      height: 28,
+      borderRadius: 28,
+      paddingVertical: 4,
+      paddingHorizontal: 12,
+    },
+    "song-token-info": createBadgeStyle("#B3B3B3", "rgba(179, 179, 179, 0.3)"),
   }
 
   const textColors: Record<BadgeVariant, string> = {
@@ -75,7 +84,9 @@ export function Badge({
     "genre-selector": selected ? "#FFFFFF" : "#B3B3B3",
     green: "#DCFD63",
     red: "#FD6363",
-    "tokens-info": "#42EE5C"
+    "tokens-info": "#42EE5C",
+    "featured-artist": "#000000",
+    "song-token-info": "#FFFFFF",
   }
 
   const textBase: TextStyle = {
@@ -96,7 +107,7 @@ export function Badge({
   )
 
   // Profile label uses gradient
-  if (variant === "profile-label") {
+  if (variant === "profile-label" || variant === "featured-artist") {
     return (
       <LinearGradient
         colors={["#71D6FB", "#DCFD63"]}
