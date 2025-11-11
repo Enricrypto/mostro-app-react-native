@@ -1,5 +1,5 @@
 import { Button } from "@/components/atoms/Button"
-import { VotingProgress } from "@/components/Molecules/VotingProgress"
+import { VotingProgress } from "@/components/molecules/VotingProgress"
 import { ThumbsDownIcon, ThumbsUpIcon } from "phosphor-react-native"
 import { useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
