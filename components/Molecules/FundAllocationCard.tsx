@@ -22,14 +22,14 @@ export const FundAllocationCard: React.FC<FundAllocationCardProps> = ({
         <Badge variant='neutral'>{status}</Badge>
       </View>
       <Text style={styles.tokens}>{tokens.toLocaleString()} Tokens</Text>
-      <Text style={styles.perk}><Text style={{color: '#B3B3B3'}}>Perk: </Text>{perk}</Text>
+      <Text style={styles.perk}>Perk: {perk}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#121B2B",
+    backgroundColor: "#0A111F",
     borderRadius: 16,
     padding: 24,
     width: "100%"
