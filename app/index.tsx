@@ -1,27 +1,29 @@
 import { Badge } from "@/components/atoms/Badge"
 import { ConnectButton } from "@/components/atoms/ConnectButton"
 import { LoadingSpinner } from "@/components/atoms/LoadingSpinner"
+import { ProfileDataCard } from "@/components/atoms/ProfileDataCard"
 import { Tooltip } from "@/components/atoms/Tooltip"
-import { ArtistCard } from "@/components/molecules/ArtistCard"
-import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
-import { Chart } from "@/components/molecules/Chart"
-import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
-import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
-import { MusicPlayer } from "@/components/molecules/MusicPlayer"
-import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
-import { PerksCard } from "@/components/molecules/PerksCard"
-import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
-import { SongCard } from "@/components/molecules/SongCard"
-import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
-import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
-import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
+import { ArtistCard } from "@/components/Molecules/ArtistCard"
+import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner"
+import { Chart } from "@/components/Molecules/Chart"
+import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard"
+import { LeaderboardCard } from "@/components/Molecules/LeaderboardCard"
+import { MusicPlayer } from "@/components/Molecules/MusicPlayer"
+import { NewLaunchCard } from "@/components/Molecules/NewLaunchCard"
+import { PerksCard } from "@/components/Molecules/PerksCard"
+import { ProfileCard } from "@/components/Molecules/ProfileCard"
+import { ProposalStatusCard } from "@/components/Molecules/ProposalStatusCard"
+import { SongCard } from "@/components/Molecules/SongCard"
+import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard"
+import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard"
+import { UpcomingEventCard } from "@/components/Molecules/UpcomingEventCard"
 import {
   VotingHistoryCard,
   VotingHistoryCardProps
-} from "@/components/molecules/VotingHistoryCard"
-import { FullArtistCard } from "@/components/organisms/FullArtistCard"
-import { StatsOverview } from "@/components/organisms/StatsOverview" // Added this line
-import { VotingSection } from "@/components/organisms/VotingSection"
+} from "@/components/Molecules/VotingHistoryCard"
+import { FullArtistCard } from "@/components/Organisms/FullArtistCard"
+import { StatsOverview } from "@/components/Organisms/StatsOverview"; // Added this line
+import { VotingSection } from "@/components/Organisms/VotingSection"
 import { ArrowUpIcon, CheckIcon } from "phosphor-react-native"
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
@@ -177,6 +179,16 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
+      {/* ProfileCard Test */}
+      <View style={styles.row}>
+        <ProfileCard Name="Dhasan" userName="@Dhasan123" imageUrl="https://www.inria.fr/sites/default/files/2021-01/A_FranceisAITalks_Unsplash_1826x1026.jpg" urlLink="0x742d...9c8a" />
+      </View>
+
+      {/* ProfileDataCard Test */}
+       <View style={styles.row}>
+        <ProfileDataCard name="Total Artist" value="$45,234" />
+      </View>
       {/* SongCard Test */}
       <View style={styles.row}>
         <SongCard
