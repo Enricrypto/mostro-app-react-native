@@ -7,6 +7,7 @@ import { ArtistCard } from "@/components/molecules/ArtistCard"
 import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
 import { Chart } from "@/components/molecules/Chart"
 import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
+import { FundAllocationCard } from "@/components/molecules/FundAllocationCard"
 import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
 import { MusicPlayer } from "@/components/molecules/MusicPlayer"
 import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
@@ -15,15 +16,17 @@ import { ProfileCard } from "@/components/molecules/ProfileCard"
 import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
 import { SongCard } from "@/components/molecules/SongCard"
 import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
+import { TransactionCard } from "@/components/molecules/TransactionCard"
 import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
 import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
 import {
   VotingHistoryCard,
   VotingHistoryCardProps
 } from "@/components/molecules/VotingHistoryCard"
-import { FullArtistCard } from "@/components/organisms/FullArtistCard"
-import { StatsOverview } from "@/components/organisms/StatsOverview" // Added this line
-import { VotingSection } from "@/components/organisms/VotingSection"
+import { FullArtistCard } from "@/components/Organisms/FullArtistCard"
+import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard"
+import { StatsOverview } from "@/components/Organisms/StatsOverview"; // Added this line
+import { VotingSection } from "@/components/Organisms/VotingSection"
 import { ArrowUpIcon, CheckIcon } from "phosphor-react-native"
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
@@ -165,6 +168,13 @@ const chartData = {
   ]
 }
 
+const fundAllocationData = {
+  title: "Live Recording costs",
+  tokens: 15000,
+  perk: "Live Album produced from the recording",
+  status: "Planned"
+}
+
 export default function Index() {
   const [isConnected, setIsConnected] = useState(false)
   const address = "0xf87b32a4E926bA49a655a9B13111d348b508f953"
@@ -179,6 +189,41 @@ export default function Index() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* TransactionCard Test */}
+      <View style={styles.row}>
+        <TransactionCard
+          tokenName='SMART'
+          usdBalance={1000.00}
+          tokenPrice={0.50}
+          platformFeePercent={2.5}
+          networkFee={0.50}
+          onClose={() => console.log("Close Transaction")}
+          onConfirm={(amount) => console.log("Confirm Purchase:", amount)}
+        />
+      </View>
+      {/* PerksHistoryCard Test */}
+      <View style={styles.row}>
+        <PerksHistoryCard
+          title='Music Drops'
+          description='Early Access to New Tracks'
+          rewards='500 Tokens'
+          locked={false}
+          onPress={() => console.log("Unlocked Milestone Pressed")}
+        />
+      </View>
+      <View style={styles.row}>
+        <PerksHistoryCard
+          title='Exclusive Content'
+          description='Unlock exclusive behind-the-scenes content'
+          rewards='1000 Tokens'
+          locked={true}
+          progress={45}
+        />
+      </View>
+        {/* FundAllocationCard Test */}
+      <View style={styles.row}>
+        <FundAllocationCard {...fundAllocationData} />
+      </View>
       {/* ProfileCard Test */}
       <View style={styles.row}>
         <ProfileCard
@@ -188,6 +233,8 @@ export default function Index() {
           urlLink='0x742d...9c8a'
         />
       </View>
+
+    
 
       {/* ProfileDataCard Test */}
       <View style={styles.row}>
