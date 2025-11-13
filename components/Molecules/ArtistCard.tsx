@@ -17,9 +17,10 @@ interface ArtistCardProps {
     graduated: boolean
     change: string
   }
+  viewArtistIconColor?: string;
 }
 
-export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
+export const ArtistCard: React.FC<ArtistCardProps> = ({ artist, viewArtistIconColor }) => {
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -54,7 +55,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
       <Button
         title='View Artist'
         variant='view-artist-no-bg'
-        icon={<ArrowSquareOutIcon size={24} color='#71D6FB' />}
+        icon={<ArrowSquareOutIcon size={24} color={viewArtistIconColor || '#71D6FB'} />}
       />
     </View>
   )

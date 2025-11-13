@@ -1,19 +1,41 @@
 import { StyleSheet, Text, View } from "react-native"
+import React from "react"
+
+interface PhosphorIconProps {
+  color?: string;
+  size?: number;
+  weight?: string;
+}
 
 interface StatsOverviewProps {
   title: string
   mainStat: string | number
   secondaryStat: string
+  icon?: React.ReactElement<PhosphorIconProps>;
+  iconColor?: string;
+  iconSize?: number;
 }
 
 export const StatsOverview: React.FC<StatsOverviewProps> = ({
   title,
   mainStat,
-  secondaryStat
+  secondaryStat,
+  icon,
+  iconColor,
+  iconSize
 }) => {
+  const defaultIconColor = '#DCFD63';
+  const defaultIconSize = 20;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
+        {icon && React.cloneElement(icon, {
+          color: iconColor || icon.props.color || defaultIconColor,
+          size: iconSize || icon.props.size || defaultIconSize,
+        })}
+      </View>
       <View style={styles.statsRow}>
         <Text style={styles.mainStat}>{mainStat}</Text>
         <Text style={styles.secondaryStat}>{secondaryStat}</Text>
@@ -29,10 +51,18 @@ const styles = StyleSheet.create({
     padding: 24,
     width: "100%"
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8
+  },
   title: {
     color: "#B3B3B3",
     fontSize: 16,
-    marginBottom: 8
+  },
+  iconContainer: {
+    // No specific styling needed for now, the icon itself will have its size/color
   },
   statsRow: {
     flexDirection: "row",

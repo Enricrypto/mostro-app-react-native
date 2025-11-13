@@ -2,29 +2,39 @@ import { Badge } from "@/components/atoms/Badge"
 import { ConnectButton } from "@/components/atoms/ConnectButton"
 import { LoadingSpinner } from "@/components/atoms/LoadingSpinner"
 import { ProfileDataCard } from "@/components/atoms/ProfileDataCard"
-import { StatsOverview } from "@/components/atoms/StatsOverview" // Added this line
+import { ProposalDataCard } from "@/components/atoms/ProposalDataCard"
+import { StatsOverview } from "@/components/atoms/StatsOverview"; // Added this line
 import { Tooltip } from "@/components/atoms/Tooltip"
 import { ArtistCard } from "@/components/molecules/ArtistCard"
 import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
+import { ArtistStats } from "@/components/molecules/ArtistStats"
 import { Chart } from "@/components/molecules/Chart"
 import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
+import { FundAllocationCard } from "@/components/molecules/FundAllocationCard"
 import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
 import { MusicPlayer } from "@/components/molecules/MusicPlayer"
 import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
 import { PerksCard } from "@/components/molecules/PerksCard"
 import { ProfileCard } from "@/components/molecules/ProfileCard"
 import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
+import { SectionMenu } from "@/components/molecules/SectionMenu"
 import { SongCard } from "@/components/molecules/SongCard"
 import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
+import { TokenStats } from "@/components/molecules/TokenStats"; // Added this line
+import { TransactionCard } from "@/components/molecules/TransactionCard"
 import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
 import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
 import {
   VotingHistoryCard,
   VotingHistoryCardProps
 } from "@/components/molecules/VotingHistoryCard"
-import { FullArtistCard } from "@/components/organisms/FullArtistCard"
-import { VotingSection } from "@/components/organisms/VotingSection"
-import { ArrowUpIcon, CheckIcon } from "phosphor-react-native"
+import { Navbar } from "@/components/navigation/Navbar"
+import { FullArtistCard } from "@/components/Organisms/FullArtistCard"
+import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar"
+import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard"
+import { ProposalSection } from "@/components/Organisms/ProposalSection"
+import { VotingSection } from "@/components/Organisms/VotingSection"
+import { ArrowUpIcon, CheckCircle, CheckIcon } from "phosphor-react-native"
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
@@ -165,6 +175,13 @@ const chartData = {
   ]
 }
 
+const fundAllocationData = {
+  title: "Live Recording costs",
+  tokens: 15000,
+  perk: "Live Album produced from the recording",
+  status: "Planned"
+}
+
 export default function Index() {
   const [isConnected, setIsConnected] = useState(false)
   const address = "0xf87b32a4E926bA49a655a9B13111d348b508f953"
@@ -178,7 +195,72 @@ export default function Index() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={{ flex: 1, backgroundColor: "#0A111F" }}>
+      <Navbar />
+      <ScrollView contentContainerStyle={styles.container}>
+      {/* TokenStats Test */}
+      <View style={styles.row}>
+        <TokenStats />
+      </View>
+      {/* ProposalSection Test */}
+      <View style={styles.row}>
+        <ProposalSection />
+      </View>
+      {/* GenreSearchBar Test */}
+      <View style={styles.row}>
+        <GenreSearchBar />
+      </View>
+      {/* SectionMenu Test */}
+      <View style={styles.row}>
+        <SectionMenu />
+      </View>
+      {/* ArtistStats Test */}
+      <View style={styles.row}>
+        <ArtistStats />
+      </View>
+      {/* ProposalDataCard Test */}
+      <View style={styles.row}>
+        <ProposalDataCard
+          title='Deadline'
+          description='November 15, 2025'
+          onPress={() => console.log("ProposalDataCard pressed")}
+        />
+      </View>
+      {/* TransactionCard Test */}
+      <View style={styles.row}>
+        <TransactionCard
+          tokenName='SMART'
+          usdBalance={1000.00}
+          tokenPrice={0.50}
+          platformFeePercent={2.5}
+          networkFee={0.50}
+          onClose={() => console.log("Close Transaction")}
+          onConfirm={(amount) => console.log("Confirm Purchase:", amount)}
+        />
+      </View>
+      {/* PerksHistoryCard Test */}
+      <View style={styles.row}>
+        <PerksHistoryCard
+          title='Music Drops'
+          description='Early Access to New Tracks'
+          rewards='500 Tokens'
+          locked={false}
+          onPress={() => console.log("Unlocked Milestone Pressed")}
+        />
+      </View>
+      <View style={styles.row}>
+        <PerksHistoryCard
+          title='Exclusive Content'
+          description='Unlock exclusive behind-the-scenes content'
+          rewards='1000 Tokens'
+          locked={true}
+          progress={45}
+        />
+      </View>
+        {/* FundAllocationCard Test */}
+      <View style={styles.row}>
+        <FundAllocationCard {...fundAllocationData} />
+      </View>
       {/* ProfileCard Test */}
       <View style={styles.row}>
         <ProfileCard
@@ -188,6 +270,8 @@ export default function Index() {
           urlLink='0x742d...9c8a'
         />
       </View>
+
+    
 
       {/* ProfileDataCard Test */}
       <View style={styles.row}>
@@ -202,10 +286,14 @@ export default function Index() {
       </View>
       {/* StatsOverview Test */}
       <View style={styles.row}>
+        
         <StatsOverview
-          title='Total Artists'
-          mainStat='247'
-          secondaryStat='+12 this week'
+          title='Proposals Approved'
+          mainStat='97'
+          secondaryStat='+12% this week'
+          icon={<CheckCircle />}
+          iconColor='#DCFD63'
+          iconSize={20}
         />
       </View>
       {/* Connect Button Test */}
@@ -363,6 +451,7 @@ export default function Index() {
         </Badge>
       </View>
     </ScrollView>
+    </View>
   )
 }
 

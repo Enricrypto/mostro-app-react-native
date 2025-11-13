@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Alert, Image, StyleSheet, View } from "react-native";
+import { View, StyleSheet, Image, Alert } from "react-native";
 import { ConnectButton } from "../atoms/ConnectButton";
 import { Menu } from "../atoms/Menu";
-import { SearchBar, SearchResult } from "../Molecules/SearchBar";
+import { SearchBar, SearchResult } from "../molecules/SearchBar";
 
 const dummySearchResults: SearchResult[] = [
   { id: "1", title: "Atlas Monroe" },
@@ -65,25 +65,23 @@ export const Navbar = () => {
 
 const styles = StyleSheet.create({
   container: {
-  width: 361,
-    height: 73,
-    backgroundColor: "#121B2B",
-    flexDirection: "row",          
-    alignItems: "center",         
-    justifyContent: "space-between", 
-    borderColor: "#2D3953",
-    borderWidth: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#0A111F",
+    borderRadius: 24,
     paddingHorizontal: 16,
-    borderRadius: 12,
+    paddingVertical: 12,
+    margin: 16,
   },
   logo: {
     width: 40,
     height: 40,
-    marginRight: 10,   
+    resizeMode: "contain",
   },
   rightSection: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 3.5,
-      },
+    gap: 12,
+  },
 });
