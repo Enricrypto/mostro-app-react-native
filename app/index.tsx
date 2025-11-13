@@ -2,9 +2,12 @@ import { Badge } from "@/components/atoms/Badge"
 import { ConnectButton } from "@/components/atoms/ConnectButton"
 import { LoadingSpinner } from "@/components/atoms/LoadingSpinner"
 import { ProfileDataCard } from "@/components/atoms/ProfileDataCard"
+import { ProposalDataCard } from "@/components/atoms/ProposalDataCard"
+import { StatsOverview } from "@/components/atoms/StatsOverview"; // Added this line
 import { Tooltip } from "@/components/atoms/Tooltip"
 import { ArtistCard } from "@/components/molecules/ArtistCard"
 import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
+import { ArtistStats } from "@/components/molecules/ArtistStats"
 import { Chart } from "@/components/molecules/Chart"
 import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
 import { FundAllocationCard } from "@/components/molecules/FundAllocationCard"
@@ -14,8 +17,10 @@ import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
 import { PerksCard } from "@/components/molecules/PerksCard"
 import { ProfileCard } from "@/components/molecules/ProfileCard"
 import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
+import { SectionMenu } from "@/components/molecules/SectionMenu"
 import { SongCard } from "@/components/molecules/SongCard"
 import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
+import { TokenStats } from "@/components/molecules/TokenStats"; // Added this line
 import { TransactionCard } from "@/components/molecules/TransactionCard"
 import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
 import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
@@ -23,11 +28,13 @@ import {
   VotingHistoryCard,
   VotingHistoryCardProps
 } from "@/components/molecules/VotingHistoryCard"
+import { Navbar } from "@/components/navigation/Navbar"
 import { FullArtistCard } from "@/components/Organisms/FullArtistCard"
+import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar"
 import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard"
-import { StatsOverview } from "@/components/Organisms/StatsOverview"; // Added this line
+import { ProposalSection } from "@/components/Organisms/ProposalSection"
 import { VotingSection } from "@/components/Organisms/VotingSection"
-import { ArrowUpIcon, CheckIcon } from "phosphor-react-native"
+import { ArrowUpIcon, CheckCircle, CheckIcon } from "phosphor-react-native"
 import React, { useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
@@ -188,7 +195,37 @@ export default function Index() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={{ flex: 1, backgroundColor: "#0A111F" }}>
+      <Navbar />
+      <ScrollView contentContainerStyle={styles.container}>
+      {/* TokenStats Test */}
+      <View style={styles.row}>
+        <TokenStats />
+      </View>
+      {/* ProposalSection Test */}
+      <View style={styles.row}>
+        <ProposalSection />
+      </View>
+      {/* GenreSearchBar Test */}
+      <View style={styles.row}>
+        <GenreSearchBar />
+      </View>
+      {/* SectionMenu Test */}
+      <View style={styles.row}>
+        <SectionMenu />
+      </View>
+      {/* ArtistStats Test */}
+      <View style={styles.row}>
+        <ArtistStats />
+      </View>
+      {/* ProposalDataCard Test */}
+      <View style={styles.row}>
+        <ProposalDataCard
+          title='Deadline'
+          description='November 15, 2025'
+          onPress={() => console.log("ProposalDataCard pressed")}
+        />
+      </View>
       {/* TransactionCard Test */}
       <View style={styles.row}>
         <TransactionCard
@@ -249,10 +286,14 @@ export default function Index() {
       </View>
       {/* StatsOverview Test */}
       <View style={styles.row}>
+        
         <StatsOverview
-          title='Total Artists'
-          mainStat='247'
-          secondaryStat='+12 this week'
+          title='Proposals Approved'
+          mainStat='97'
+          secondaryStat='+12% this week'
+          icon={<CheckCircle />}
+          iconColor='#DCFD63'
+          iconSize={20}
         />
       </View>
       {/* Connect Button Test */}
@@ -410,6 +451,7 @@ export default function Index() {
         </Badge>
       </View>
     </ScrollView>
+    </View>
   )
 }
 
