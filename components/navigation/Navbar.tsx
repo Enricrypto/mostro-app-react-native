@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, Alert } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
 import { ConnectButton } from "../atoms/ConnectButton";
 import { Menu } from "../atoms/Menu";
-import { SearchBar, SearchResult } from "../molecules/SearchBar";
+import { SearchBar, SearchResult } from "../Molecules/SearchBar";
 
 const dummySearchResults: SearchResult[] = [
   { id: "1", title: "Atlas Monroe" },
