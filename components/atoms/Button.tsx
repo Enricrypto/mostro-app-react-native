@@ -34,6 +34,7 @@ type ButtonVariant =
   | "status-badge"
   | "play-circle"
   | "play-featured"
+  | "continue"
 
 interface ButtonProps {
   title?: string
@@ -280,7 +281,17 @@ const variantStyles: Record<
       minWidth: 100,
     },
     textStyle: { ...baseText, color: "#000000" }
-  }
+  },
+  "continue": {
+    style: {
+      ...baseButton,
+      minWidth: 288,
+      borderWidth: 1,
+      borderColor: "#DCFD63B2",
+      backgroundColor: "#DCFD63B2"
+    },
+    textStyle: { ...baseText, color: "#000000ff" }
+  },
 }
 
 export const Button = ({

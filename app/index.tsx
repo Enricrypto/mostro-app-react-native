@@ -11,6 +11,7 @@ import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
 import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
 import { MusicPlayer } from "@/components/molecules/MusicPlayer"
 import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
+import { OnBoardingScreen } from "@/components/molecules/OnBoardingScreen"
 import { PerksCard } from "@/components/molecules/PerksCard"
 import { ProfileCard } from "@/components/molecules/ProfileCard"
 import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
@@ -24,8 +25,9 @@ import {
 } from "@/components/molecules/VotingHistoryCard"
 import { FullArtistCard } from "@/components/organisms/FullArtistCard"
 import { VotingSection } from "@/components/organisms/VotingSection"
-import { ArrowUpIcon, CheckIcon } from "phosphor-react-native"
-import React, { useState } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { ArrowDownIcon, ArrowUpIcon } from "phosphor-react-native"
+import React, { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
 const track = {
@@ -168,6 +170,7 @@ const chartData = {
 export default function Index() {
   const [isConnected, setIsConnected] = useState(false)
   const address = "0xf87b32a4E926bA49a655a9B13111d348b508f953"
+  const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null)
 
   const handleConnect = () => {
     setIsConnected(true)
@@ -176,7 +179,26 @@ export default function Index() {
   const handleDisconnect = () => {
     setIsConnected(false)
   }
+  useEffect(() => {
+    const checkOnboarding = async () => {
+      const value = await AsyncStorage.getItem("hasSeenOnboarding")
+      setShowOnboarding(value === null)
+    }
+    checkOnboarding()
+  }, [])
 
+  const handleOnboardingDone = async () => {
+    await AsyncStorage.setItem("hasSeenOnboarding", "true")
+    setShowOnboarding(false)
+  }
+
+  if (showOnboarding === null) {
+    return <Text>Loading...</Text> // splash or loader
+  }
+
+  if (showOnboarding) {
+    return <OnBoardingScreen onDone={handleOnboardingDone} />
+  }
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* ProfileCard Test */}
@@ -203,9 +225,12 @@ export default function Index() {
       {/* StatsOverview Test */}
       <View style={styles.row}>
         <StatsOverview
-          title='Total Artists'
-          mainStat='247'
-          secondaryStat='+12 this week'
+          title='Proposals Approved'
+          mainStat='97'
+          secondaryStat='+12% this week'
+          icon={<ArrowUpIcon />}
+          iconColor='#DCFD63'
+          iconSize={20}
         />
       </View>
       {/* Connect Button Test */}
@@ -322,7 +347,7 @@ export default function Index() {
         <Badge variant='profile-label'>Profile Label</Badge>
         <Badge
           variant='profile-label'
-          icon={<CheckIcon color='#000' size={12} />}
+          icon={<ArrowUpIcon color='#000' size={12} />}
         >
           Verified
         </Badge>
@@ -355,10 +380,10 @@ export default function Index() {
 
       {/* Example with icon */}
       <View style={styles.row}>
-        <Badge variant='green' icon={<CheckIcon color='#DCFD63' size={12} />}>
+        <Badge variant='green' icon={<ArrowUpIcon color='#DCFD63' size={12} />}>
           With Icon
         </Badge>
-        <Badge variant='red' icon={<ArrowUpIcon color='#FD6363' size={12} />}>
+        <Badge variant='red' icon={<ArrowDownIcon color='#FD6363' size={12} />}>
           Alert
         </Badge>
       </View>

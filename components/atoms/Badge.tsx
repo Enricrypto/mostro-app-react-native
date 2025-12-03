@@ -12,6 +12,7 @@ type BadgeVariant =
   | "tokens-info"
   | "featured-artist"
   | "song-token-info"
+  | "section-menu-item"
 
 interface BadgeProps {
   variant?: BadgeVariant
@@ -72,7 +73,14 @@ export function Badge({
       paddingVertical: 4,
       paddingHorizontal: 12
     },
-    "song-token-info": createBadgeStyle("#B3B3B3", "rgba(179, 179, 179, 0.3)")
+    "song-token-info": createBadgeStyle("#B3B3B3", "rgba(179, 179, 179, 0.3)"),
+    "section-menu-item": {
+      height: 32,
+      borderRadius: 8,
+      paddingVertical: 6,
+      paddingHorizontal: 16,
+      backgroundColor: selected ? "#6654D3" : "transparent"
+    }
   }
 
   const textColors: Record<BadgeVariant, string> = {
@@ -85,7 +93,8 @@ export function Badge({
     red: "#FD6363",
     "tokens-info": "#42EE5C",
     "featured-artist": "#000000",
-    "song-token-info": "#FFFFFF"
+    "song-token-info": "#FFFFFF",
+    "section-menu-item": selected ? "#FFFFFF" : "#B3B3B3"
   }
 
   const textBase: TextStyle = {
