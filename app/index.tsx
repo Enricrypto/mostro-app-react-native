@@ -5,37 +5,39 @@ import { ProfileDataCard } from "@/components/atoms/ProfileDataCard"
 import { ProposalDataCard } from "@/components/atoms/ProposalDataCard"
 import { StatsOverview } from "@/components/atoms/StatsOverview"; // Added this line
 import { Tooltip } from "@/components/atoms/Tooltip"
-import { ArtistCard } from "@/components/molecules/ArtistCard"
-import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
-import { ArtistStats } from "@/components/molecules/ArtistStats"
-import { Chart } from "@/components/molecules/Chart"
-import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
-import { FundAllocationCard } from "@/components/molecules/FundAllocationCard"
-import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
-import { MusicPlayer } from "@/components/molecules/MusicPlayer"
-import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
-import { PerksCard } from "@/components/molecules/PerksCard"
-import { ProfileCard } from "@/components/molecules/ProfileCard"
-import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
-import { SectionMenu } from "@/components/molecules/SectionMenu"
-import { SongCard } from "@/components/molecules/SongCard"
-import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
-import { TokenStats } from "@/components/molecules/TokenStats"; // Added this line
-import { TransactionCard } from "@/components/molecules/TransactionCard"
-import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
-import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
+import { ArtistCard } from "@/components/Molecules/ArtistCard"
+import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner"
+import { ArtistStats } from "@/components/Molecules/ArtistStats"
+import { Chart } from "@/components/Molecules/Chart"
+import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard"
+import { FundAllocationCard } from "@/components/Molecules/FundAllocationCard"
+import { LeaderboardCard } from "@/components/Molecules/LeaderboardCard"
+import { MusicPlayer } from "@/components/Molecules/MusicPlayer"
+import { NewLaunchCard } from "@/components/Molecules/NewLaunchCard"
+import { OnBoardingScreen } from "@/components/Molecules/OnBoardingScreen"
+import { PerksCard } from "@/components/Molecules/PerksCard"
+import { ProfileCard } from "@/components/Molecules/ProfileCard"
+import { ProposalStatusCard } from "@/components/Molecules/ProposalStatusCard"
+import { SectionMenu } from "@/components/Molecules/SectionMenu"
+import { SongCard } from "@/components/Molecules/SongCard"
+import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard"
+import { TokenStats } from "@/components/Molecules/TokenStats"; // Added this line
+import { TransactionCard } from "@/components/Molecules/TransactionCard"
+import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard"
+import { UpcomingEventCard } from "@/components/Molecules/UpcomingEventCard"
 import {
   VotingHistoryCard,
   VotingHistoryCardProps
-} from "@/components/molecules/VotingHistoryCard"
+} from "@/components/Molecules/VotingHistoryCard"
 import { Navbar } from "@/components/navigation/Navbar"
 import { FullArtistCard } from "@/components/Organisms/FullArtistCard"
 import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar"
 import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard"
 import { ProposalSection } from "@/components/Organisms/ProposalSection"
 import { VotingSection } from "@/components/Organisms/VotingSection"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ArrowUpIcon, CheckCircle, CheckIcon } from "phosphor-react-native"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
 const track = {
@@ -185,6 +187,8 @@ const fundAllocationData = {
 export default function Index() {
   const [isConnected, setIsConnected] = useState(false)
   const address = "0xf87b32a4E926bA49a655a9B13111d348b508f953"
+  const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
+
 
   const handleConnect = () => {
     setIsConnected(true)
@@ -193,7 +197,28 @@ export default function Index() {
   const handleDisconnect = () => {
     setIsConnected(false)
   }
+useEffect(() => {
+    const checkOnboarding = async () => {
+      const value = await AsyncStorage.getItem('hasSeenOnboarding');
+      setShowOnboarding(value === null); 
+    };
+    checkOnboarding();
+  }, []);
 
+  const handleOnboardingDone = async () => {
+    await AsyncStorage.setItem('hasSeenOnboarding', 'true');
+    setShowOnboarding(false);
+  };
+
+  if (showOnboarding === null) {
+    return <Text>Loading...</Text>; // splash or loader
+  }
+
+  if (showOnboarding) {
+    return (
+      <OnBoardingScreen onDone={handleOnboardingDone} />
+    );
+  }
   return (
     <View style={{ flex: 1, backgroundColor: "#0A111F" }}>
       <Navbar />
