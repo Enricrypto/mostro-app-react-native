@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { ProposalDataCard } from '../atoms/ProposalDataCard';
-import { FundAllocationCard } from '../molecules/FundAllocationCard';
 import { RequestedAmountCard } from '../atoms/RequestedAmountCard';
+import { FundAllocationCard } from '../Molecules/FundAllocationCard';
 
 const fundAllocations = [
   {
