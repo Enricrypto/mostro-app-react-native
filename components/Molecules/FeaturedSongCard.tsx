@@ -40,13 +40,16 @@ export const FeaturedSongCard: React.FC<FeaturedSongCardProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#121B2B",
+     borderColor: "#2D3953",
+    borderWidth: 2,
     borderRadius: 16,
     padding: 16,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+     backgroundColor: "#121B2B",
+    
   },
   leftContent: {
     flexDirection: "row",

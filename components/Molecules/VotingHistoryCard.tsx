@@ -43,10 +43,13 @@ export const VotingHistoryCard: React.FC<VotingHistoryCardProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#0A111F",
+    backgroundColor: "#121B2B",
+    borderColor: "#2D3953",
+    borderWidth: 2,
     borderRadius: 16,
     padding: 24,
     width: "100%"
+
   },
   header: {
     flexDirection: "row",

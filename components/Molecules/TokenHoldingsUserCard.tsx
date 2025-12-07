@@ -1,6 +1,6 @@
 import { Avatar } from "@/components/atoms/Avatar"
 import { Badge } from "@/components/atoms/Badge"
-import { MedalIcon } from "phosphor-react-native" // Using Medal icon for "Perks Unlocked"
+import { MedalIcon } from "phosphor-react-native"; // Using Medal icon for "Perks Unlocked"
 import { StyleSheet, Text, View } from "react-native"
 
 interface TokenHoldingsUserCardProps {
@@ -57,7 +57,9 @@ export const TokenHoldingsUserCard: React.FC<TokenHoldingsUserCardProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#0A111F",
+    backgroundColor: "#121B2B",
+    borderColor: "#2D3953",
+    borderWidth: 2,
     borderRadius: 16,
     padding: 24,
     width: "100%"

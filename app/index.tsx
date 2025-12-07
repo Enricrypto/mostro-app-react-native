@@ -1,34 +1,20 @@
-import { Badge } from "@/components/atoms/Badge"
-import { ConnectButton } from "@/components/atoms/ConnectButton"
-import { LoadingSpinner } from "@/components/atoms/LoadingSpinner"
-import { ProfileDataCard } from "@/components/atoms/ProfileDataCard"
-import { StatsOverview } from "@/components/atoms/StatsOverview" // Added this line
-import { Tooltip } from "@/components/atoms/Tooltip"
-import { ArtistCard } from "@/components/molecules/ArtistCard"
-import { ArtistProfileBanner } from "@/components/molecules/ArtistProfileBanner"
-import { Chart } from "@/components/molecules/Chart"
-import { FeaturedSongCard } from "@/components/molecules/FeaturedSongCard"
-import { LeaderboardCard } from "@/components/molecules/LeaderboardCard"
-import { MusicPlayer } from "@/components/molecules/MusicPlayer"
-import { NewLaunchCard } from "@/components/molecules/NewLaunchCard"
-import { OnBoardingScreen } from "@/components/molecules/OnBoardingScreen"
-import { PerksCard } from "@/components/molecules/PerksCard"
-import { ProfileCard } from "@/components/molecules/ProfileCard"
-import { ProposalStatusCard } from "@/components/molecules/ProposalStatusCard"
-import { SongCard } from "@/components/molecules/SongCard"
-import { TokenHoldingsUserCard } from "@/components/molecules/TokenHoldingsUserCard"
-import { TrendingTokenCard } from "@/components/molecules/TrendingTokenCard"
-import { UpcomingEventCard } from "@/components/molecules/UpcomingEventCard"
+import { ProfileDataCard } from "@/components/atoms/ProfileDataCard";
+import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard";
+import { OnBoardingScreen } from "@/components/Molecules/OnBoardingScreen";
+import { ProfileCard } from "@/components/Molecules/ProfileCard";
+import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard";
 import {
   VotingHistoryCard,
   VotingHistoryCardProps
-} from "@/components/molecules/VotingHistoryCard"
-import { FullArtistCard } from "@/components/organisms/FullArtistCard"
-import { VotingSection } from "@/components/organisms/VotingSection"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { ArrowDownIcon, ArrowUpIcon } from "phosphor-react-native"
-import React, { useEffect, useState } from "react"
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+} from "@/components/Molecules/VotingHistoryCard";
+import { Navbar } from "@/components/navigation/Navbar";
+import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar";
+import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ArrowUpRightIcon } from "phosphor-react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 
 const track = {
   title: "Burning Up",
@@ -201,8 +187,15 @@ export default function Index() {
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* ProfileCard Test */}
-      <View style={styles.row}>
+
+      <View >
+        <Navbar />
+      </View>
+
+      <View style={styles.containerGenre}>
+        <GenreSearchBar onSelectGenre={(genre: any) => console.log("Selected genre:", genre)} />
+      </View>
+      <View style={styles.ProfileCard}>
         <ProfileCard
           Name='Dhasan'
           userName='@Dhasan123'
@@ -210,183 +203,63 @@ export default function Index() {
           urlLink='0x742d...9c8a'
         />
       </View>
+      <View style={styles.row}>
 
-      {/* ProfileDataCard Test */}
-      <View style={styles.row}>
-        <ProfileDataCard name='Total Artist' value='$45,234' />
+        <ProfileDataCard name={"Total Artist"} value={"$45,234"} />
+        <ProfileDataCard name={"Artist Supported"} value={"8"} />
+        <ProfileDataCard name={"Total Votes cast"} value={"24"} />
+        <ProfileDataCard name={"Perks Unlocked"} value={"2"} />
       </View>
-      {/* SongCard Test */}
-      <View style={styles.row}>
-        <SongCard
-          {...songCardData}
-          onPressPlay={() => console.log("Play Song")}
-        />
+
+      <View style={styles.TrackSectionContainer}>
+        <Text style={styles.TrackSectionTitle}> Favourite Tracks</Text>
+        <View style={styles.row}>
+          <FeaturedSongCard {...featuredSongCardData} />
+          <FeaturedSongCard {...featuredSongCardData} />
+          <FeaturedSongCard {...featuredSongCardData} />
+          <FeaturedSongCard {...featuredSongCardData} />
+          <FeaturedSongCard {...featuredSongCardData} />
+          <FeaturedSongCard {...featuredSongCardData} />
+        </View>
       </View>
-      {/* StatsOverview Test */}
-      <View style={styles.row}>
-        <StatsOverview
-          title='Proposals Approved'
-          mainStat='97'
-          secondaryStat='+12% this week'
-          icon={<ArrowUpIcon />}
-          iconColor='#DCFD63'
-          iconSize={20}
-        />
-      </View>
-      {/* Connect Button Test */}
-      <View style={styles.row}>
-        <ConnectButton
-          onConnect={handleConnect}
-          onDisconnect={handleDisconnect}
-          isConnected={isConnected}
-          address={address}
-        />
-      </View>
-      {/* Loading Spinner Test */}
-      <View style={styles.row}>
-        <LoadingSpinner size='large' color='#71D6FB' speed={1} />
-        <LoadingSpinner size='small' color='#DCFD63' speed={2} />
-      </View>
-      {/* ProgressBar Test */}
-      <View style={styles.row}>
-        <VotingSection />
-      </View>
-      {/* Tooltip Test */}
-      <View style={styles.row}>
-        <Tooltip content='This is a tooltip' position='top'>
-          <Text style={{ color: "#ffffffff" }}>Press me for a tooltip</Text>
-        </Tooltip>
-      </View>
-      {/* MusicPlayer Test */}
-      <View style={styles.row}>
-        <MusicPlayer track={track} />
-      </View>
-      {/* ArtistCard Test */}
-      <View style={styles.row}>
-        <ArtistCard artist={artist} />
-      </View>
-      {/* FullArtistCard Test */}
-      <View style={styles.row}>
-        <FullArtistCard artist={fullArtist} />
-      </View>
-      {/* LeaderboardCard Test */}
-      <View style={styles.row}>
-        <LeaderboardCard rank={1} user={leaderboardUser} />
-      </View>
-      {/* NewLaunchCard Test */}
-      <View style={styles.row}>
-        <NewLaunchCard
-          token={newLaunchToken}
-          onViewArtist={() => console.log("View Artist")}
-        />
-      </View>
-      {/* TrendingTokenCard Test */}
-      <View style={styles.row}>
-        <TrendingTokenCard
-          token={trendingToken}
-          onPress={() => console.log("Pressed")}
-        />
-      </View>
-      {/* ArtistProfileBanner Test */}
-      <View style={styles.row}>
-        <ArtistProfileBanner
-          artist={artistProfile}
-          onViewArtist={() => console.log("View Artist")}
-        />
-      </View>
-      {/* ProposalStatusCard Test */}
-      <View style={styles.row}>
-        <ProposalStatusCard
-          proposal={proposal}
-          onViewProposal={() => console.log("View Proposal")}
-        />
-      </View>
-      {/* VotingHistoryCard Test */}
-      <View style={styles.row}>
-        <VotingHistoryCard {...votingHistoryCardData} />
-      </View>
-      {/* TokenHoldingsUserCard Test */}
-      <View style={styles.row}>
+      <View >
+        <Text style={styles.TockenSectionTitle}> Token Holdings</Text>
+        <View style={styles.row}>
         <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+        </View>
+          <TouchableOpacity style={styles.button}>
+                            <Text style={{color: "#ffffff"}}>View All</Text>
+                             <ArrowUpRightIcon size={24} color='#ffffff' />
+        </TouchableOpacity>
       </View>
-      {/* PerksCard Test */}
-      <View style={styles.row}>
-        <PerksCard {...perksCardData} />
+      <View>
+        <Text style={styles.TrackSectionTitle}> Unlocked Perks</Text>
+        <View style={styles.row}>
+          <PerksHistoryCard locked={false} {...perksCardData} />
+          <PerksHistoryCard locked={false} {...perksCardData} />
+          <PerksHistoryCard locked={false} {...perksCardData} />
+        </View>
+         <TouchableOpacity style={styles.button}>
+                            <Text style={{color: "#ffffff"}}>View All</Text>
+                             <ArrowUpRightIcon size={24} color='#ffffff' />
+        </TouchableOpacity>
       </View>
-      {/* FeaturedSongCard Test */}
-      <View style={styles.row}>
-        <FeaturedSongCard
-          {...featuredSongCardData}
-          onPressPlay={() => console.log("Play Featured Song")}
-        />
-      </View>
-      {/* UpcomingEventCard Test */}
-      <View style={styles.row}>
-        <UpcomingEventCard
-          {...upcomingEventCardData}
-          onClaimAccess={() => console.log("Claim Access")}
-          onAddToCalendar={() => console.log("Add to Calendar")}
-        />
-      </View>
-      {/* Chart Test */}
-      <View style={styles.row}>
-        <Chart data={chartData} />
-      </View>
-      {/* Genre Profile */}
-      <View style={styles.row}>
-        <Badge variant='genre-profile'>Genre Profile</Badge>
+      <View>
+        <Text style={styles.VotingSectionTitle}> Voting History</Text>
+        <View style={styles.row}>
+          <VotingHistoryCard {...votingHistoryCardData} />
+          <VotingHistoryCard {...votingHistoryCardData} />
+          <VotingHistoryCard {...votingHistoryCardData} />
+        </View>
+
+        <TouchableOpacity style={styles.button}>
+                            <Text style={{color: "#ffffff"}}>View All</Text>
+                             <ArrowUpRightIcon size={24} color='#ffffff' />
+        </TouchableOpacity>
       </View>
 
-      {/* Price Increase */}
-      <View style={styles.row}>
-        <Badge variant='price-increase'>Price ↑</Badge>
-      </View>
-
-      {/* Profile Label */}
-      <View style={styles.row}>
-        <Badge variant='profile-label'>Profile Label</Badge>
-        <Badge
-          variant='profile-label'
-          icon={<ArrowUpIcon color='#000' size={12} />}
-        >
-          Verified
-        </Badge>
-      </View>
-
-      {/* Neutral */}
-      <View style={styles.row}>
-        <Badge variant='neutral'>Neutral</Badge>
-      </View>
-
-      {/* Genre Selector */}
-      <View style={styles.row}>
-        <Badge variant='genre-selector' selected={false}>
-          Not Selected
-        </Badge>
-        <Badge variant='genre-selector' selected={true}>
-          Selected
-        </Badge>
-      </View>
-
-      {/* Green */}
-      <View style={styles.row}>
-        <Badge variant='green'>Green</Badge>
-      </View>
-
-      {/* Red */}
-      <View style={styles.row}>
-        <Badge variant='red'>Red</Badge>
-      </View>
-
-      {/* Example with icon */}
-      <View style={styles.row}>
-        <Badge variant='green' icon={<ArrowUpIcon color='#DCFD63' size={12} />}>
-          With Icon
-        </Badge>
-        <Badge variant='red' icon={<ArrowDownIcon color='#FD6363' size={12} />}>
-          Alert
-        </Badge>
-      </View>
     </ScrollView>
   )
 }
@@ -404,5 +277,68 @@ const styles = StyleSheet.create({
     gap: 12,
     justifyContent: "center",
     width: "100%"
+  },
+  containerGenre: {
+    width: 393,
+    height: 72,
+    position: 'absolute',
+    top: 130,
+    left: 1,
+    opacity: 1,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: '#121B2B',
+    borderRadius: 6,
+    paddingLeft: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+
+  },
+  ProfileCard: {
+    marginTop: 130,
+  },
+  TrackSectionContainer: {
+    paddingTop: 16,
+    paddingBottom: 16,
+  },
+  TrackSectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#FFFFFF",
+    paddingBottom: 8,
+    alignItems: "flex-start",
+    alignSelf: "flex-start"
+  },
+  TockenSectionTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#FFFFFF",
+    paddingBottom: 8,
+    alignItems: "flex-start",
+    alignSelf: "flex-start"
+  },
+  VotingSectionTitle: {
+     fontSize: 20,
+    fontWeight: "600",
+    paddingTop: 10,
+    paddingBottom: 10,
+    color: "#FFFFFF",
+    alignItems: "flex-start",
+    alignSelf: "flex-start"
+  },
+  button: {
+    marginTop: 30,
+    marginBottom: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "transparent",
+    borderRadius: 8,
+    alignItems: "center",
+    borderColor: "#71D6FB",
+    borderWidth: 1,
+    justifyContent: "center",
+    flexDirection: "row",     
+    gap: 8
+    
   }
 })

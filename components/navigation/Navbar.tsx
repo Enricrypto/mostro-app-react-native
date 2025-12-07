@@ -65,23 +65,25 @@ export const Navbar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#0A111F",
-    borderRadius: 24,
+  width: 361,
+    height: 73,
+    backgroundColor: "#121B2B",
+    flexDirection: "row",          
+    alignItems: "center",         
+    justifyContent: "space-between", 
+    borderColor: "#2D3953",
+    borderWidth: 2,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    margin: 16,
+    borderRadius: 12,
   },
   logo: {
     width: 40,
     height: 40,
-    resizeMode: "contain",
+    marginRight: 10,   
   },
   rightSection: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-  },
+    gap: 3.5,
+      },
 });

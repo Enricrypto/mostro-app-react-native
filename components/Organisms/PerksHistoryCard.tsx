@@ -57,7 +57,11 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
     padding: 20,
-    width: "100%"
+    width: "100%",
+    borderColor: "#6654D3",
+    borderWidth: 2,
+    backgroundColor: "#121B2B"
+  
   },
   unlockedContainer: {
     backgroundColor: "#1C1C3A",
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#6654D3"
   },
   lockedContainer: {
-    backgroundColor: "#1A1A1A",
+    backgroundColor: "#121B2B",
     opacity: 0.7
   },
   content: {
