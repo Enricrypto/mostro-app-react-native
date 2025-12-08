@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native"
-import React from "react"
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 interface PhosphorIconProps {
   color?: string;
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   },
   statsRow: {
     flexDirection: "row",
-    alignItems: "baseline"
+    alignItems: "baseline",
+    flexWrap: "wrap",
   },
   mainStat: {
     color: "#FFFFFF",
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
   secondaryStat: {
     color: "#DCFD63",
     fontSize: 16,
+    flexShrink  : 1,
     fontWeight: "bold"
   }
 })

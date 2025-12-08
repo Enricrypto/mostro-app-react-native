@@ -36,7 +36,7 @@ const statsData = [
     },
     {
         title: 'Featured In',
-        mainStat: '3 Playlists',
+        mainStat: '3 Plays',
         secondaryStat: 'this month',
         icon: <Star size={20} color="#DCFD63" />
     }

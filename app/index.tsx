@@ -1,19 +1,17 @@
-import { ProfileDataCard } from "@/components/atoms/ProfileDataCard";
-import { FeaturedSongCard } from "@/components/Molecules/FeaturedSongCard";
+import { ArtistCard } from "@/components/Molecules/ArtistCard";
+import { ArtistProfileBanner } from "@/components/Molecules/ArtistProfileBanner";
+import { ArtistStats } from "@/components/Molecules/ArtistStats";
 import { OnBoardingScreen } from "@/components/Molecules/OnBoardingScreen";
-import { ProfileCard } from "@/components/Molecules/ProfileCard";
-import { TokenHoldingsUserCard } from "@/components/Molecules/TokenHoldingsUserCard";
+import { TrendingTokenCard } from "@/components/Molecules/TrendingTokenCard";
 import {
-  VotingHistoryCard,
   VotingHistoryCardProps
 } from "@/components/Molecules/VotingHistoryCard";
 import { Navbar } from "@/components/navigation/Navbar";
 import { GenreSearchBar } from "@/components/Organisms/GenreSearchBar";
-import { PerksHistoryCard } from "@/components/Organisms/PerksHistoryCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ArrowUpRightIcon } from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 const track = {
@@ -195,66 +193,88 @@ export default function Index() {
       <View style={styles.containerGenre}>
         <GenreSearchBar onSelectGenre={(genre: any) => console.log("Selected genre:", genre)} />
       </View>
-      <View style={styles.ProfileCard}>
-        <ProfileCard
-          Name='Dhasan'
-          userName='@Dhasan123'
-          imageUrl='https://www.inria.fr/sites/default/files/2021-01/A_FranceisAITalks_Unsplash_1826x1026.jpg'
-          urlLink='0x742d...9c8a'
+
+      <View style={styles.ProfileCard} >
+        <ArtistProfileBanner artist={artistProfile} />
+      </View>
+
+
+
+      <View style={{ marginTop: 30 }}>
+        <ArtistStats />
+      </View>
+
+    <View>
+      <View  style={{marginTop: 30, marginBottom: 20}}>
+       <Text style={styles.TockenSectionTitle}>Top Artist</Text>
+      </View>
+     
+      <View style={{
+        flexDirection: "column",
+        rowGap: 20
+      }}>
+        <ArtistCard artist={artist} />
+        <ArtistCard artist={artist} />
+        <ArtistCard artist={artist} />
+      </View>
+    </View>
+    
+     <View style={{marginTop: 30, marginBottom: 20}}>
+  <Text style={{
+    color:"#ffffff",
+    textAlign: "left",
+    alignSelf: "flex-start",
+    fontWeight: "600",
+    fontSize: 20
+  }}>
+    Top Holders
+  </Text>
+</View>
+
+      <View style={styles.ContainerTopholder}>
+        <Text style={styles.rank}>#1</Text>
+        <Image
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          style={styles.avatar}
         />
-      </View>
-      <View style={styles.row}>
-
-        <ProfileDataCard name={"Total Artist"} value={"$45,234"} />
-        <ProfileDataCard name={"Artist Supported"} value={"8"} />
-        <ProfileDataCard name={"Total Votes cast"} value={"24"} />
-        <ProfileDataCard name={"Perks Unlocked"} value={"2"} />
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
       </View>
 
-      <View style={styles.TrackSectionContainer}>
-        <Text style={styles.TrackSectionTitle}> Favourite Tracks</Text>
-        <View style={styles.row}>
-          <FeaturedSongCard {...featuredSongCardData} />
-          <FeaturedSongCard {...featuredSongCardData} />
-          <FeaturedSongCard {...featuredSongCardData} />
-          <FeaturedSongCard {...featuredSongCardData} />
-          <FeaturedSongCard {...featuredSongCardData} />
-          <FeaturedSongCard {...featuredSongCardData} />
-        </View>
+        <View style={styles.ContainerTopholder}>
+        <Text style={styles.rank}>#1</Text>
+        <Image
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          style={styles.avatar}
+        />
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
       </View>
+        <View style={styles.ContainerTopholder}>
+        <Text style={styles.rank}>#1</Text>
+        <Image
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          style={styles.avatar}
+        />
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+      </View>
+        <View style={styles.ContainerTopholder}>
+        <Text style={styles.rank}>#1</Text>
+        <Image
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppkoKsaYMuIoNLDH7O8ePOacLPG1mKXtEng&s" }}
+          style={styles.avatar}
+        />
+        <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "500" }}> Mostrofan.th</Text>
+      </View>
+
       <View >
-        <Text style={styles.TockenSectionTitle}> Token Holdings</Text>
+      <View style={{marginTop: 30, marginBottom: 20}}>
+           <Text style={styles.TockenSectionTitle}> Trending Tokens</Text>
+      </View>
         <View style={styles.row}>
-        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
-        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
-        <TokenHoldingsUserCard {...tokenHoldingsUserData} />
+          <TrendingTokenCard token={trendingToken} />
+          <TrendingTokenCard token={trendingToken} />
+          <TrendingTokenCard token={trendingToken} />
         </View>
           <TouchableOpacity style={styles.button}>
-                            <Text style={{color: "#ffffff"}}>View All</Text>
-                             <ArrowUpRightIcon size={24} color='#ffffff' />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Text style={styles.TrackSectionTitle}> Unlocked Perks</Text>
-        <View style={styles.row}>
-          <PerksHistoryCard locked={false} {...perksCardData} />
-          <PerksHistoryCard locked={false} {...perksCardData} />
-          <PerksHistoryCard locked={false} {...perksCardData} />
-        </View>
-         <TouchableOpacity style={styles.button}>
-                            <Text style={{color: "#ffffff"}}>View All</Text>
-                             <ArrowUpRightIcon size={24} color='#ffffff' />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Text style={styles.VotingSectionTitle}> Voting History</Text>
-        <View style={styles.row}>
-          <VotingHistoryCard {...votingHistoryCardData} />
-          <VotingHistoryCard {...votingHistoryCardData} />
-          <VotingHistoryCard {...votingHistoryCardData} />
-        </View>
-
-        <TouchableOpacity style={styles.button}>
                             <Text style={{color: "#ffffff"}}>View All</Text>
                              <ArrowUpRightIcon size={24} color='#ffffff' />
         </TouchableOpacity>
@@ -301,12 +321,12 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 16,
   },
-  TrackSectionTitle: {
+  TopHoldersSectionTitle: {
     fontSize: 20,
     fontWeight: "600",
     color: "#FFFFFF",
     paddingBottom: 8,
-    alignItems: "flex-start",
+    textAlign: "left",
     alignSelf: "flex-start"
   },
   TockenSectionTitle: {
@@ -317,8 +337,38 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     alignSelf: "flex-start"
   },
+
+  ContainerTopholder: {
+    width: 361,
+    height: 64,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#2D3953",
+    paddingTop: 12,
+    paddingRight: 16,
+    paddingBottom: 12,
+    paddingLeft: 16,
+    flexDirection: "row",     // ✅ children in a row
+    alignItems: "center",     // ✅ vertical centering
+    justifyContent: "flex-start",
+    opacity: 1,
+    gap: 8,                   // ✅ RN 0.71+ supports gap
+  },
+  rank: {
+    fontFamily: "Inter",
+    fontWeight: "600",
+    fontSize: 18,
+    lineHeight: 28,
+    letterSpacing: 0,
+    color: "#B3B3B3"
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,         // ✅ half of width/height → perfect circle
+  },
   VotingSectionTitle: {
-     fontSize: 20,
+    fontSize: 20,
     fontWeight: "600",
     paddingTop: 10,
     paddingBottom: 10,
@@ -337,8 +387,8 @@ const styles = StyleSheet.create({
     borderColor: "#71D6FB",
     borderWidth: 1,
     justifyContent: "center",
-    flexDirection: "row",     
+    flexDirection: "row",
     gap: 8
-    
+
   }
 })
