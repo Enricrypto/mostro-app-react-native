@@ -22,7 +22,10 @@ export const FundAllocationCard: React.FC<FundAllocationCardProps> = ({
         <Badge variant='neutral'>{status}</Badge>
       </View>
       <Text style={styles.tokens}>{tokens.toLocaleString()} Tokens</Text>
-      <Text style={styles.perk}><Text style={{color: '#B3B3B3'}}>Perk: </Text>{perk}</Text>
+      <Text style={styles.perk}>
+        <Text style={{ color: "#B3B3B3" }}>Perk: </Text>
+        {perk}
+      </Text>
     </View>
   )
 }
